@@ -283,8 +283,8 @@
 				</tr>
 
 				<tr>
-					<td><a href="tableau.php?tab=tableauM" style="color:midnightblue;">L</a></td>
-					<td><a href="tableau.php?tab=tableauM" style="color:midnightblue;">NC à 17(&lsaquo;1799)</a></td>
+					<td><a href="tableau.php?tab=tableauL" style="color:midnightblue;">L</a></td>
+					<td><a href="tableau.php?tab=tableauL" style="color:midnightblue;">NC à 17(&lsaquo;1799)</a></td>
 					<td><?php
 						$cnx = mysqli_connect("", "", "", "");
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
@@ -325,7 +325,7 @@
 					<td>Dim. 14H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauN" style="color:midnightblue;">M</a></td>
+					<td><a href="tableau.php?tab=tableauN" style="color:midnightblue;">N</a></td>
 					<td><a href="tableau.php?tab=tableauN" style="color:midnightblue;">Elite Dames TC</a></td>
 					<td><?php
 						$cnx = mysqli_connect("", "", "", "");
