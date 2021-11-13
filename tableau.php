@@ -22,7 +22,7 @@
 		<!-- Intro -->
 		<div id="intro">
 			<?php
-			$cnx = mysqli_connect("", "", "", "");
+			$cnx = mysqli_connect();
 			if (mysqli_connect_errno()) // on vérifie si la connection a reussi
 			{
 				echo 'impossible de se connecter a mysql';

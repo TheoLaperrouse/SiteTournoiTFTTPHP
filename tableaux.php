@@ -52,7 +52,7 @@
 					<td><a href="tableau.php?tab=tableauA" style="color:midnightblue;">NC à 13(&lsaquo;1399)</a></td>
 					<td>
 						<?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -74,7 +74,7 @@
 					<td><a href="tableau.php?tab=tableauB" style="color:midnightblue;">B</a></td>
 					<td><a href="tableau.php?tab=tableauB" style="color:midnightblue;">NC à 8(&lsaquo;899)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -95,7 +95,7 @@
 					<td><a href="tableau.php?tab=tableauC" style="color:midnightblue;">C</a></td>
 					<td><a href="tableau.php?tab=tableauC" style="color:midnightblue;">NC à 18(&lsaquo;1899)</a> </td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -117,7 +117,7 @@
 					<td><a href="tableau.php?tab=tableauD" style="color:midnightblue;">D</a></td>
 					<td><a href="tableau.php?tab=tableauD" style="color:midnightblue;">NC à 11(&lsaquo;1199)</a> </td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -138,7 +138,7 @@
 					<td><a href="tableau.php?tab=tableauE" style="color:midnightblue;">E</a></td>
 					<td><a href="tableau.php?tab=tableauE" style="color:midnightblue;">NC à 15(&lsaquo;1599)</a> </td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a réussie
 						{
 							echo 'impossible de se connecter a mysql';
@@ -159,7 +159,7 @@
 					<td><a href="tableau.php?tab=tableauF" style="color:midnightblue;">F</a></td>
 					<td><a href="tableau.php?tab=tableauF" style="color:midnightblue;">NC à n°1001</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -180,7 +180,7 @@
 					<td><a href="tableau.php?tab=tableauG" style="color:midnightblue;">G</a></td>
 					<td><a href="tableau.php?tab=tableauG" style="color:midnightblue;">Benjamins et Minimes</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -201,7 +201,7 @@
 					<td><a href="tableau.php?tab=tableauH" style="color:midnightblue;">H</a></td>
 					<td><a href="tableau.php?tab=tableauH" style="color:midnightblue;">NC à 14(&lsaquo;1499)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -222,7 +222,7 @@
 					<td><a href="tableau.php?tab=tableauI" style="color:midnightblue;">I</a></td>
 					<td><a href="tableau.php?tab=tableauI" style="color:midnightblue;">NC à 9(&lsaquo;999)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -243,7 +243,7 @@
 					<td><a href="tableau.php?tab=tableauJ" style="color:midnightblue;">J</a></td>
 					<td><a href="tableau.php?tab=tableauJ" style="color:midnightblue;">NC à n°300</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -264,7 +264,7 @@
 					<td><a href="tableau.php?tab=tableauK" style="color:midnightblue;">K</a></td>
 					<td><a href="tableau.php?tab=tableauK" style="color:midnightblue;">NC à 12(&lsaquo;1299)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -286,7 +286,7 @@
 					<td><a href="tableau.php?tab=tableauL" style="color:midnightblue;">L</a></td>
 					<td><a href="tableau.php?tab=tableauL" style="color:midnightblue;">NC à 17(&lsaquo;1799)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -307,7 +307,7 @@
 					<td><a href="tableau.php?tab=tableauM" style="color:midnightblue;">M</a></td>
 					<td><a href="tableau.php?tab=tableauM" style="color:midnightblue;">Toutes Catégories Messieurs</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a reussi
 						{
 							echo 'impossible de se connecter a mysql';
@@ -328,7 +328,7 @@
 					<td><a href="tableau.php?tab=tableauN" style="color:midnightblue;">N</a></td>
 					<td><a href="tableau.php?tab=tableauN" style="color:midnightblue;">Elite Dames TC</a></td>
 					<td><?php
-						$cnx = mysqli_connect("", "", "", "");
+						$cnx = mysqli_connect();
 						if (mysqli_connect_errno()) // on verifie si la connection a réussi
 						{
 							echo 'impossible de se connecter a mysql';
