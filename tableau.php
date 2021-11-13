@@ -63,7 +63,7 @@
 		<div id="copyright">
 			<ul>
 				<li>
-					<h3>Si vous avez un problème avec votre inscription, veuillez me contacter par mail (theo.laperrouse@laposte.net) ou par Messenger(<a href="https://www.facebook.com/messages/t/theo.laperrouse"> Théo Laperrouse</a>)</h3>
+					<h3>Si vous avez un problème avec votre inscription, veuillez me contacter par mail (theolaperrouse@gmail.com) ou par Messenger(<a href="https://www.facebook.com/messages/t/theo.laperrouse"> Théo Laperrouse</a>)</h3>
 				</li>
 			</ul>
 			<ul>
