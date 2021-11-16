@@ -37,6 +37,49 @@
 		<div id="main">
 			<article>
 				<?php
+
+				$tabValues = array(
+					"tableauA" => array("place" => 72, "ptsMax" => 1400),
+					"tableauB" => array("place" => 72, "ptsMax" => 900),
+					"tableauC" => array("place" => 72, "ptsMax" => 1900),
+					"tableauD" => array("place" => 72, "ptsMax" => 1200),
+					"tableauE" => array("place" => 72, "ptsMax" => 1600),
+					"tableauF" => array("place" => 72, "ptsMax" => 2200),
+					"tableauG" => array("place" => 36, "ptsMax" => 3500),
+					"tableauH" => array("place" => 72, "ptsMax" => 1500),
+					"tableauI" => array("place" => 72, "ptsMax" => 1000),
+					"tableauJ" => array("place" => 72, "ptsMax" => 2900),
+					"tableauK" => array("place" => 72, "ptsMax" => 1300),
+					"tableauL" => array("place" => 72, "ptsMax" => 1800),
+					"tableauM" => array("place" => 72, "ptsMax" => 3500),
+					"tableauN" => array("place" => 36, "ptsMax" => 3500),
+				);
+				
+				function inscriptTab($prenom, $nom, $nbrePts, $numLicence, $club, $tableau, $cnx,$tabValues)
+				{
+					if (1000 < $numLicence && $numLicence < 9999999) {
+						if($tableau != ''){
+							$sql = "INSERT INTO $tableau (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePoints,$numLicence,\"$club\")";
+							$place = "SELECT count(*) as nbInscrits FROM $tableau";
+							$result = mysqli_query($cnx, $place);
+							$row = mysqli_fetch_assoc($result);
+							$nameTab = substr($tableau,-1);
+							$ptsMax = $tabValues[$tableau]["ptsMax"];
+							$place = $tabValues[$tableau]["place"];
+							if ($row['nbInscrits'] >= $place) {
+								echo "<h2 align='center'>Le tableau $nameTab est complet</h2>";
+							} else if ($nbrePts < $ptsMax) {
+								$res = $cnx->query($sql);
+								echo "<h2 align='center'>Vous êtes inscrit au tableau $nameTab</h2>";
+							} else {
+								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau $nameTab</h2>";
+							}
+						}
+					}
+					else {
+						echo "<h2 align='center'>Le numéro de Licence est incorrecte</h2>";
+					}
+				}$cnx = 
 				$cnx = mysqli_connect();
 				if (!$cnx) {
 					die("Connection error: " . mysqli_connect_errno());
@@ -51,373 +94,14 @@
 				$tab4 = $_POST['tabDim2'];
 				$numLic = $_POST['numLic'];
 
-				if (1000 < $numLic && $numLic < 9999999) {
-					$sql = "INSERT INTO $tab1 (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePts,$numLic,\"$club\")";
-					$place = "SELECT count(*) as nbInscrits FROM $tab1";
+				$result = mysqli_query($cnx, $place);
+				$row = mysqli_fetch_assoc($result);
 
-					switch ($tab1) {
-						case "tableauA":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau A est complet</h2>";
-							} else if ($nbrePts < 1400) {
-								$res = $cnx->query($sql);
-								echo $row['nbInscrits'] >= 72;
-								echo "<h2 align='center'>Vous êtes inscrit au tableau A</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau A</h2>";
-							}
-							break;
-						case "tableauB":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau B est complet</h2>";
-							} else if ($nbrePts < 900) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau B</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau B</h2>";
-							}
-							break;
-						case "tableauC":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau C est complet</h2>";
-							} else if ($nbrePts < 1900) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau C</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau C</h2>";
-							}
-							break;
-						case "tableauD":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau D est complet, votre inscription n'a pas été prise en compte</h2>";
-							} else if ($nbrePts < 1200) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau D</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau E</h2>";
-							}
-							break;
-						case "tableauE":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau E est complet</h2>";
-							} else if ($nbrePts < 1600) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau E</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau E</h2>";
-							}
-							break;
-						case "tableauF":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau F est complet</h2>";
-							} else if ($nbrePts < 2200) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau F</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau F</h2>";
-							}
-							break;
-						case "tableauG":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 36) {
-								echo "<h2 align='center'>Le tableau G est complet</h2>";
-							} else {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau G</p>";
-							}
-							break;
-						default:
-							break;
-					}
-
-
-					$sql = "INSERT INTO $tab2 (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePts,$numLic,\"$club\")";
-					$place = "SELECT count(*) as nbInscrits FROM $tab2";
-					switch ($tab2) {
-						case "tableauA":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau A est complet</h2>";
-							} else if ($nbrePts < 1400) {
-								$res = $cnx->query($sql);
-								echo $row['nbInscrits'] >= 72;
-								echo "<h2 align='center'>Vous êtes inscrit au tableau A</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau A</h2>";
-							}
-							break;
-						case "tableauB":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau B est complet</h2>";
-							} else if ($nbrePts < 900) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau B</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau B</h2>";
-							}
-							break;
-						case "tableauC":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau C est complet</h2>";
-							} else if ($nbrePts < 1900) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau C</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau C</h2>";
-							}
-							break;
-						case "tableauD":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau D est complet, votre inscription n'a pas été prise en compte</h2>";
-							} else if ($nbrePts < 1200) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau D</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau E</h2>";
-							}
-							break;
-						case "tableauE":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau E est complet</h2>";
-							} else if ($nbrePts < 1600) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau E</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau E</h2>";
-							}
-							break;
-						case "tableauF":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau F est complet</h2>";
-							} else if ($nbrePts < 2200) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau F</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau F</h2>";
-							}
-							break;
-						case "tableauG":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 36) {
-								echo "<h2 align='center'>Le tableau G est complet</h2>";
-							} else {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau G</p>";
-							}
-							break;
-						default:
-							break;
-					}
-
-					$sql = "INSERT INTO $tab3 (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePts,$numLic,\"$club\")";
-					$place = "SELECT count(*) as nbInscrits FROM $tab3";
-					switch ($tab3) {
-						case "tableauH":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($nbrePts < 1500) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau H</h2>";
-							} else if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau H est complet</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau H</h2>";
-							}
-							break;
-						case "tableauI":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($nbrePts < 1000) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau I</h2>";
-							} else if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau I est complet</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau I</h2>";
-							}
-							break;
-						case "tableauJ":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($nbrePts < 2899) {
-
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau J</h2>";
-							} else if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau J est complet</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau J</h2>";
-							}
-							break;
-						case "tableauK":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau K est complet, votre inscription n'a pas été prise en compte</h2>";
-							} 
-							else if ($nbrePts < 1300) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau K</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau K</h2>";
-							}
-							break;
-						case "tableauL":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($nbrePts < 1800) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau L</h2>";
-							} else if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau L est complet</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau L</h2>";
-							}
-							break;
-						case "tableauM":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($nbrePts > 1500) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau M</h2>";
-							} else if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau M est complet</h2>";
-							} else {
-								echo "<h2 align='center'>Il vous faut plus de 1500 points pour participer au tableau M</h2>";
-							}
-							break;
-						case "tableauN":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 36) {
-								echo "<h2 align='center'>Le tableau H est complet</h2>";
-							} else {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau N</h2>";
-							}
-							break;
-						default:
-							break;
-					}
-
-					$sql = "INSERT INTO $tab4 (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePts,$numLic,\"$club\")";
-					$place = "SELECT count(*) as nbInscrits FROM $tab4";
-					switch ($tab4) {
-						case "tableauH":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau H est complet</h2>";
-							} else if ($nbrePts < 1500) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau H</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau H</h2>";
-							}
-							break;
-						case "tableauI":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau I est complet</h2>";
-							} else if ($nbrePts < 1000) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau I</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau I</h2>";
-							}
-							break;
-						case "tableauJ":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau J est complet</h2>";
-							} else if ($nbrePts < 2899) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau J</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau J</h2>";
-							}
-							break;
-						case "tableauK":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau K est complet, votre inscription n'a pas été prise en compte</h2>";
-							} 
-							else if ($nbrePts < 1300) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau K</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau K</h2>";
-							}
-							break;
-						case "tableauL":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-								echo "<h2 align='center'>Le tableau L est complet</h2>";
-							} else if ($nbrePts < 1800) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau L</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau L</h2>";
-							}
-							break;
-						case "tableauM":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 72) {
-
-								echo "<h2 align='center'>Le tableau M est complet</h2>";
-							} else if ($nbrePts > 1500) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau M</h2>";
-							} else {
-								echo "<h2 align='center'>Il vous faut plus de 1500 points pour participer au tableau M</h2>";
-							}
-							break;
-						case "tableauN":
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							if ($row['nbInscrits'] >= 36) {
-								echo "<h2 align='center'>Le tableau H est complet</h2>";
-							} else {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau N</h2>";
-							}
-							break;
-						default:
-							break;
-					}
-				} else {
-					echo "<h2 align='center'>Le numéro de Licence est incorrecte</h2>";
-				}
+				inscriptTab($prenom, $nom, $nbrePts, $numLic, $club, $tab1, $cnx, $tabValues);
+				inscriptTab($prenom, $nom, $nbrePts, $numLic, $club, $tab2, $cnx, $tabValues);
+				inscriptTab($prenom, $nom, $nbrePts, $numLic, $club, $tab3, $cnx, $tabValues);
+				inscriptTab($prenom, $nom, $nbrePts, $numLic, $club, $tab4, $cnx, $tabValues);
+	
 				mysqli_close($cnx);
 				?>
 				<br>
