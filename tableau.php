@@ -41,7 +41,7 @@
 
 		<!-- Header -->
 		<header id="header">
-			<a href="tableaux.php" class="logo">Retournez aux tableaux</a>
+			<a href="/tournoi/tableaux.php" class="logo">Retournez aux tableaux</a>
 		</header>
 
 		<!-- Main -->

@@ -129,17 +129,6 @@
 		// Background.
 		$wrapper._parallax(0.925);
 
-		// Change toggle styling once we've scrolled past the header.
-		$header.scrollex({
-			bottom: '5vh',
-			enter: function () {
-				$navPanelToggle.removeClass('alt');
-			},
-			leave: function () {
-				$navPanelToggle.addClass('alt');
-			}
-		});
-
 
 		// Hack: Disable transitions on WP.
 		if (skel.vars.os == 'wp'
