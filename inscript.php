@@ -57,29 +57,31 @@
 				
 				function inscriptTab($prenom, $nom, $nbrePts, $numLicence, $club, $tableau, $cnx,$tabValues)
 				{
-					if (1000 < $numLicence && $numLicence < 9999999) {
-						if($tableau != ''){
-							$sql = "INSERT INTO $tableau (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePoints,$numLicence,\"$club\")";
-							$place = "SELECT count(*) as nbInscrits FROM $tableau";
-							$result = mysqli_query($cnx, $place);
-							$row = mysqli_fetch_assoc($result);
-							$nameTab = substr($tableau,-1);
-							$ptsMax = $tabValues[$tableau]["ptsMax"];
-							$place = $tabValues[$tableau]["place"];
-							if ($row['nbInscrits'] >= $place) {
-								echo "<h2 align='center'>Le tableau $nameTab est complet</h2>";
-							} else if ($nbrePts < $ptsMax) {
-								$res = $cnx->query($sql);
-								echo "<h2 align='center'>Vous êtes inscrit au tableau $nameTab</h2>";
-							} else {
-								echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau $nameTab</h2>";
-							}
+					if($tableau != ''){
+						if (1000 < $numLicence && $numLicence < 9999999) {
+							
+								$sql = "INSERT INTO $tableau (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePoints,$numLicence,\"$club\")";
+								$place = "SELECT count(*) as nbInscrits FROM $tableau";
+								$result = mysqli_query($cnx, $place);
+								$row = mysqli_fetch_assoc($result);
+								$nameTab = substr($tableau,-1);
+								$ptsMax = $tabValues[$tableau]["ptsMax"];
+								$place = $tabValues[$tableau]["place"];
+								if ($row['nbInscrits'] >= $place) {
+									echo "<h2 align='center'>Le tableau $nameTab est complet</h2>";
+								} else if ($nbrePts < $ptsMax) {
+									$res = $cnx->query($sql);
+									echo "<h2 align='center'>Vous êtes inscrit au tableau $nameTab</h2>";
+								} else {
+									echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau $nameTab</h2>";
+								}			
+						}
+						else {
+							echo "<h2 align='center'>Le numéro de Licence est incorrecte</h2>";
 						}
 					}
-					else {
-						echo "<h2 align='center'>Le numéro de Licence est incorrecte</h2>";
-					}
-				}$cnx = 
+				}
+
 				$cnx = mysqli_connect();
 				if (!$cnx) {
 					die("Connection error: " . mysqli_connect_errno());
