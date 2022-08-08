@@ -82,7 +82,7 @@
 					}
 				}
 
-				$cnx = mysqli_connect();
+				$cnx = mysqli_connect("db", "user", "test", "myDb");
 				if (!$cnx) {
 					die("Connection error: " . mysqli_connect_errno());
 				}
@@ -107,7 +107,7 @@
 				mysqli_close($cnx);
 				?>
 				<br>
-				<h2 style="color:indigo;"><a href="tableaux.php">Voir les tableaux</a></h2>
+				<h2 class="center" style="color:indigo;"><a href="tableaux.php">Voir les tableaux</a></h2>
 		</div>
 
 		<!-- Footer -->

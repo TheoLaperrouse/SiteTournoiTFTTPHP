@@ -22,8 +22,8 @@
 		<!-- Intro -->
 		<div id="intro">
 			<?php
-			$cnx = mysqli_connect();
-			if (mysqli_connect_errno()) // on vérifie si la connection a reussi
+			$cnx = mysqli_connect("db", "user", "test", "myDb");
+			if (mysqli_connect_errno())
 			{
 				echo 'impossible de se connecter a mysql';
 			}
@@ -41,7 +41,7 @@
 
 		<!-- Header -->
 		<header id="header">
-			<a href="/tournoi/tableaux.php" class="logo">Retournez aux tableaux</a>
+			<a href="./tableaux.php" class="logo">Retournez aux tableaux</a>
 		</header>
 
 		<!-- Main -->
