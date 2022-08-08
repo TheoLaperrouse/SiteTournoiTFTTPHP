@@ -10,8 +10,8 @@
 	<title>Tableau</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="stylesheet" href="./assets/css/main.css" />
+	<link rel="icon" type="image/png" href="./favicon.png">
 </head>
 
 <body class="is-loading">
@@ -22,7 +22,7 @@
 		<!-- Intro -->
 		<div id="intro">
 			<?php
-			$cnx = mysqli_connect("db", "user", "test", "myDb");
+						$cnx = mysqli_connect("db", "user", "test", "myDb");
 			if (mysqli_connect_errno())
 			{
 				echo 'impossible de se connecter a mysql';
