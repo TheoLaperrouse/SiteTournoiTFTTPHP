@@ -60,7 +60,7 @@
 					if($tableau != ''){
 						if (1000 < $numLicence && $numLicence < 9999999) {
 							
-								$sql = "INSERT INTO $tableau (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePoints,$numLicence,\"$club\")";
+								$sql = "INSERT INTO $tableau (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePts,$numLicence,\"$club\")";
 								$place = "SELECT count(*) as nbInscrits FROM $tableau";
 								$result = mysqli_query($cnx, $place);
 								$row = mysqli_fetch_assoc($result);

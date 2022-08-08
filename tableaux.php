@@ -34,7 +34,7 @@
 		</header>
 
 		<!-- Main -->
-		<div id="main">
+		<div id="main" style="overflow-y: scroll;">
 			<table>
 				<tr>
 					<th>N°</th>
