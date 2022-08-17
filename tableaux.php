@@ -1,11 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
-
 <head>
 	<title>Les Tableaux</title>
 	<meta charset="utf-8" />
@@ -13,13 +7,19 @@
 	<link rel="stylesheet" href="./assets/css/main.css" />
 	<link rel="icon" type="image/png" href="./favicon.png">
 </head>
-
+<?php
+	function getPlace($tab)
+	{
+		$cnx = mysqli_connect("db", "user", "test", "myDb");
+		$sql = "SELECT count(*) as nbInscrits FROM $tab";
+		$result = mysqli_query($cnx, $sql);
+		$row = mysqli_fetch_assoc($result);
+		echo $row['nbInscrits'];
+		mysqli_close($cnx);
+	}
+?>
 <body>
-
-	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
-
-		<!-- Intro -->
 		<div id="intro">
 			<h1>Tableaux du Tournoi</h1>
 			<p>Cliquez sur les tableaux pour voir les inscrits</p>
@@ -27,13 +27,9 @@
 				<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Les tableaux</a></li>
 			</ul>
 		</div>
-
-		<!-- Header -->
 		<header id="header">
 			<a href="index.html" class="logo">Retourner au formulaire</a>
 		</header>
-
-		<!-- Main -->
 		<div id="main" style="overflow-y: scroll;">
 			<table>
 				<tr>
@@ -48,19 +44,11 @@
 					<th>Jour et Heure</th>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauA" style="color:midnightblue;">A</a></td>
-					<td><a href="tableau.php?tab=tableauA" style="color:midnightblue;">NC à 13(&lsaquo;1399)</a></td>
+					<td><a href="tableau.php?tab=tableauA" class="link">A</a></td>
+					<td><a href="tableau.php?tab=tableauA" class="link">NC à 13(&lsaquo;1399)</a></td>
 					<td>
 						<?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauA";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauA")
 						?>/72
 					</td>
 					<td>10€</td>
@@ -71,18 +59,10 @@
 					<td>Sam. 9H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauB" style="color:midnightblue;">B</a></td>
-					<td><a href="tableau.php?tab=tableauB" style="color:midnightblue;">NC à 8(&lsaquo;899)</a></td>
+					<td><a href="tableau.php?tab=tableauB" class="link">B</a></td>
+					<td><a href="tableau.php?tab=tableauB" class="link">NC à 8(&lsaquo;899)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauB";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauB")
 						?>/72</td>
 					<td>5€</td>
 					<td>10€</td>
@@ -92,18 +72,10 @@
 					<td>Sam. 10H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauC" style="color:midnightblue;">C</a></td>
-					<td><a href="tableau.php?tab=tableauC" style="color:midnightblue;">NC à 18(&lsaquo;1899)</a> </td>
+					<td><a href="tableau.php?tab=tableauC" class="link">C</a></td>
+					<td><a href="tableau.php?tab=tableauC" class="link">NC à 18(&lsaquo;1899)</a> </td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauC";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauC")
 						?>
 						/72</td>
 					<td>10€</td>
@@ -114,18 +86,10 @@
 					<td>Sam. 11H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauD" style="color:midnightblue;">D</a></td>
-					<td><a href="tableau.php?tab=tableauD" style="color:midnightblue;">NC à 11(&lsaquo;1199)</a> </td>
+					<td><a href="tableau.php?tab=tableauD" class="link">D</a></td>
+					<td><a href="tableau.php?tab=tableauD" class="link">NC à 11(&lsaquo;1199)</a> </td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauD";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauD")
 						?>/72</td>
 					<td>5€</td>
 					<td>10€</td>
@@ -135,18 +99,10 @@
 					<td>Sam. 12H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauE" style="color:midnightblue;">E</a></td>
-					<td><a href="tableau.php?tab=tableauE" style="color:midnightblue;">NC à 15(&lsaquo;1599)</a> </td>
+					<td><a href="tableau.php?tab=tableauE" class="link">E</a></td>
+					<td><a href="tableau.php?tab=tableauE" class="link">NC à 15(&lsaquo;1599)</a> </td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a réussie
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauE";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauE")
 						?>/72</td>
 					<td>10€</td>
 					<td>15€</td>
@@ -156,18 +112,10 @@
 					<td>Sam. 13H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauF" style="color:midnightblue;">F</a></td>
-					<td><a href="tableau.php?tab=tableauF" style="color:midnightblue;">NC à n°1001</a></td>
+					<td><a href="tableau.php?tab=tableauF" class="link">F</a></td>
+					<td><a href="tableau.php?tab=tableauF" class="link">NC à n°1001</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauF";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauF")
 						?>/72</td>
 					<td>15€</td>
 					<td>25€</td>
@@ -177,18 +125,10 @@
 					<td>Sam. 14H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauG" style="color:midnightblue;">G</a></td>
-					<td><a href="tableau.php?tab=tableauG" style="color:midnightblue;">Benjamins et Minimes</a></td>
+					<td><a href="tableau.php?tab=tableauG" class="link">G</a></td>
+					<td><a href="tableau.php?tab=tableauG" class="link">Benjamins et Minimes</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauG";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauG")
 						?>/36</td>
 					<td>Lots</td>
 					<td>Lots</td>
@@ -198,18 +138,10 @@
 					<td>Sam. 15H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauH" style="color:midnightblue;">H</a></td>
-					<td><a href="tableau.php?tab=tableauH" style="color:midnightblue;">NC à 14(&lsaquo;1499)</a></td>
+					<td><a href="tableau.php?tab=tableauH" class="link">H</a></td>
+					<td><a href="tableau.php?tab=tableauH" class="link">NC à 14(&lsaquo;1499)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauH";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauH")
 						?>/72</td>
 					<td>10€</td>
 					<td>15€</td>
@@ -219,18 +151,10 @@
 					<td>Dim. 9H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauI" style="color:midnightblue;">I</a></td>
-					<td><a href="tableau.php?tab=tableauI" style="color:midnightblue;">NC à 9(&lsaquo;999)</a></td>
+					<td><a href="tableau.php?tab=tableauI" class="link">I</a></td>
+					<td><a href="tableau.php?tab=tableauI" class="link">NC à 9(&lsaquo;999)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauI";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauI")
 						?>/72</td>
 					<td>5€</td>
 					<td>10€</td>
@@ -240,18 +164,10 @@
 					<td>Dim. 10H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauJ" style="color:midnightblue;">J</a></td>
-					<td><a href="tableau.php?tab=tableauJ" style="color:midnightblue;">NC à n°300</a></td>
+					<td><a href="tableau.php?tab=tableauJ" class="link">J</a></td>
+					<td><a href="tableau.php?tab=tableauJ" class="link">NC à n°300</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauJ";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauJ")
 						?>/72</td>
 					<td>15€</td>
 					<td>30€</td>
@@ -261,18 +177,10 @@
 					<td>Dim. 11H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauK" style="color:midnightblue;">K</a></td>
-					<td><a href="tableau.php?tab=tableauK" style="color:midnightblue;">NC à 12(&lsaquo;1299)</a></td>
+					<td><a href="tableau.php?tab=tableauK" class="link">K</a></td>
+					<td><a href="tableau.php?tab=tableauK" class="link">NC à 12(&lsaquo;1299)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauK";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauK")
 						?>/72</td>
 					<td>10€</td>
 					<td>20€</td>
@@ -283,18 +191,10 @@
 				</tr>
 
 				<tr>
-					<td><a href="tableau.php?tab=tableauL" style="color:midnightblue;">L</a></td>
-					<td><a href="tableau.php?tab=tableauL" style="color:midnightblue;">NC à 17(&lsaquo;1799)</a></td>
+					<td><a href="tableau.php?tab=tableauL" class="link">L</a></td>
+					<td><a href="tableau.php?tab=tableauL" class="link">NC à 17(&lsaquo;1799)</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauL";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauL")
 						?>/72</td>
 					<td>10€</td>
 					<td>20€</td>
@@ -304,18 +204,10 @@
 					<td>Dim. 13H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauM" style="color:midnightblue;">M</a></td>
-					<td><a href="tableau.php?tab=tableauM" style="color:midnightblue;">Toutes Catégories Messieurs</a></td>
+					<td><a href="tableau.php?tab=tableauM" class="link">M</a></td>
+					<td><a href="tableau.php?tab=tableauM" class="link">Toutes Catégories Messieurs</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a reussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauM";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauM")
 						?>/72</td>
 					<td>30€</td>
 					<td>60€</td>
@@ -325,18 +217,10 @@
 					<td>Dim. 14H00</td>
 				</tr>
 				<tr>
-					<td><a href="tableau.php?tab=tableauN" style="color:midnightblue;">N</a></td>
-					<td><a href="tableau.php?tab=tableauN" style="color:midnightblue;">Elite Dames TC</a></td>
+					<td><a href="tableau.php?tab=tableauN" class="link">N</a></td>
+					<td><a href="tableau.php?tab=tableauN" class="link">Elite Dames TC</a></td>
 					<td><?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-						if (mysqli_connect_errno()) // on verifie si la connection a réussi
-						{
-							echo 'impossible de se connecter a mysql';
-						}
-						$sql = "SELECT count(*) as nbInscrits FROM tableauN";
-						$result = mysqli_query($cnx, $sql);
-						$row = mysqli_fetch_assoc($result);
-						echo $row['nbInscrits'];
+						getPlace("tableauN")
 						?>/36</td>
 					<td>10€</td>
 					<td>20€</td>
@@ -346,10 +230,7 @@
 					<td>Dim. 15H00</td>
 				</tr>
 			</table>
-
 		</div>
-
-		<!-- Footer -->
 		<div id="copyright">
 			<ul>
 				<li>

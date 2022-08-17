@@ -1,11 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
-
 <head>
 	<title>Votre Inscription</title>
 	<meta charset="utf-8" />
@@ -13,13 +7,8 @@
 	<link rel="stylesheet" href="./assets/css/main.css" />
 	<link rel="icon" type="image/png" href="./favicon.png">
 </head>
-
 <body class="is-loading">
-
-	<!-- Wrapper -->
 	<div id="wrapper" class="fade-in">
-
-		<!-- Intro -->
 		<div id="intro">
 			<h1>Formulaire d'inscription</h1>
 			<p>au tournoi de Tennis de Table de Thorigné Fouillard</p>
@@ -27,17 +16,12 @@
 				<li><a href="#header" class="button icon solo fa-arrow-down scrolly">S'inscrire</a></li>
 			</ul>
 		</div>
-
-		<!-- Header -->
 		<header id="header">
-			<a href="index.html" align='center' class="logo">Inscription</a>
+			<a href="index.html" class="center" class="logo">Inscription</a>
 		</header>
-
-		<!-- Main -->
 		<div id="main">
 			<article>
 				<?php
-
 				$tabValues = array(
 					"tableauA" => array("place" => 72, "ptsMax" => 1400),
 					"tableauB" => array("place" => 72, "ptsMax" => 900),
@@ -68,16 +52,16 @@
 								$ptsMax = $tabValues[$tableau]["ptsMax"];
 								$place = $tabValues[$tableau]["place"];
 								if ($row['nbInscrits'] >= $place) {
-									echo "<h2 align='center'>Le tableau $nameTab est complet</h2>";
+									echo "<h2 class='center'>Le tableau $nameTab est complet</h2>";
 								} else if ($nbrePts < $ptsMax) {
 									$res = $cnx->query($sql);
-									echo "<h2 align='center'>Vous êtes inscrit au tableau $nameTab</h2>";
+									echo "<h2 class='center'>Vous êtes inscrit au tableau $nameTab</h2>";
 								} else {
-									echo "<h2 align='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau $nameTab</h2>";
+									echo "<h2 class='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau $nameTab</h2>";
 								}			
 						}
 						else {
-							echo "<h2 align='center'>Le numéro de Licence est incorrecte</h2>";
+							echo "<h2 class='center'>Le numéro de Licence est incorrecte</h2>";
 						}
 					}
 				}
@@ -109,8 +93,6 @@
 				<br>
 				<h2 class="center" style="color:indigo;"><a href="tableaux.php">Voir les tableaux</a></h2>
 		</div>
-
-		<!-- Footer -->
 		<div id="copyright">
 			<ul>
 				<li>
@@ -124,8 +106,6 @@
 		</div>
 		</article>
 	</div>
-
-	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
