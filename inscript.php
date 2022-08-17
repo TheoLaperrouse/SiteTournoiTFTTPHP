@@ -17,79 +17,33 @@
 			</ul>
 		</div>
 		<header id="header">
-			<a href="index.html" class="center" class="logo">Inscription</a>
+			<a href="index.html" class="center logo">Inscription</a>
 		</header>
 		<div id="main">
 			<article>
 				<?php
-				$tabValues = array(
-					"tableauA" => array("place" => 72, "ptsMax" => 1400),
-					"tableauB" => array("place" => 72, "ptsMax" => 900),
-					"tableauC" => array("place" => 72, "ptsMax" => 1900),
-					"tableauD" => array("place" => 72, "ptsMax" => 1200),
-					"tableauE" => array("place" => 72, "ptsMax" => 1600),
-					"tableauF" => array("place" => 72, "ptsMax" => 2200),
-					"tableauG" => array("place" => 36, "ptsMax" => 3500),
-					"tableauH" => array("place" => 72, "ptsMax" => 1500),
-					"tableauI" => array("place" => 72, "ptsMax" => 1000),
-					"tableauJ" => array("place" => 72, "ptsMax" => 2900),
-					"tableauK" => array("place" => 72, "ptsMax" => 1300),
-					"tableauL" => array("place" => 72, "ptsMax" => 1800),
-					"tableauM" => array("place" => 72, "ptsMax" => 3500),
-					"tableauN" => array("place" => 36, "ptsMax" => 3500),
-				);
-				
-				function inscriptTab($prenom, $nom, $nbrePts, $numLicence, $club, $tableau, $cnx,$tabValues)
-				{
-					if($tableau != ''){
-						if (1000 < $numLicence && $numLicence < 9999999) {
-							
-								$sql = "INSERT INTO $tableau (`prenom`, `nom`, `nombrePoints`, `numLicence`, `club`) VALUES (\"$prenom\",\"$nom\",$nbrePts,$numLicence,\"$club\")";
-								$place = "SELECT count(*) as nbInscrits FROM $tableau";
-								$result = mysqli_query($cnx, $place);
-								$row = mysqli_fetch_assoc($result);
-								$nameTab = substr($tableau,-1);
-								$ptsMax = $tabValues[$tableau]["ptsMax"];
-								$place = $tabValues[$tableau]["place"];
-								if ($row['nbInscrits'] >= $place) {
-									echo "<h2 class='center'>Le tableau $nameTab est complet</h2>";
-								} else if ($nbrePts < $ptsMax) {
-									$res = $cnx->query($sql);
-									echo "<h2 class='center'>Vous êtes inscrit au tableau $nameTab</h2>";
-								} else {
-									echo "<h2 class='center'>Vous n'avez pas le bon nombre de Points pour participer au tableau $nameTab</h2>";
-								}			
-						}
-						else {
-							echo "<h2 class='center'>Le numéro de Licence est incorrecte</h2>";
-						}
-					}
-				}
+                    include "functions.php";
 
-				$cnx = mysqli_connect("db", "user", "test", "myDb");
-				if (!$cnx) {
-					die("Connection error: " . mysqli_connect_errno());
-				}
-				$nom = strip_tags($_POST['nom']);
-				$prenom = strip_tags($_POST['prenom']);
-				$club = strip_tags($_POST['nomClub']);
-				$nbrePts = $_POST['nbrePts'];
-				$tab1 = $_POST['tabSam1'];
-				$tab2 = $_POST['tabSam2'];
-				$tab3 = $_POST['tabDim1'];
-				$tab4 = $_POST['tabDim2'];
-				$numLic = $_POST['numLic'];
+                    $nom = strip_tags($_POST["nom"]);
+                    $prenom = strip_tags($_POST["prenom"]);
+                    $club = strip_tags($_POST["nomClub"]);
+                    $nbrePts = strip_tags($_POST["nbrePts"]);
+                    $tab1 = strip_tags($_POST["tabSam1"]);
+                    $tab2 = strip_tags($_POST["tabSam2"]);
+                    $tab3 = strip_tags($_POST["tabDim1"]);
+                    $tab4 = strip_tags($_POST["tabDim2"]);
+                    $numLic = strip_tags($_POST["numLic"]);
 
-				$result = mysqli_query($cnx, $place);
-				$row = mysqli_fetch_assoc($result);
-
-				inscriptTab($prenom, $nom, $nbrePts, $numLic, $club, $tab1, $cnx, $tabValues);
-				inscriptTab($prenom, $nom, $nbrePts, $numLic, $club, $tab2, $cnx, $tabValues);
-				inscriptTab($prenom, $nom, $nbrePts, $numLic, $club, $tab3, $cnx, $tabValues);
-				inscriptTab($prenom, $nom, $nbrePts, $numLic, $club, $tab4, $cnx, $tabValues);
-	
-				mysqli_close($cnx);
-				?>
+                    inscriptTab(
+                        $prenom,
+                        $nom,
+                        $nbrePts,
+                        $numLic,
+                        $club,
+                        [$tab1, $tab2, $tab3, $tab4],
+                        $cnx
+                    );
+                ?>
 				<br>
 				<h2 class="center" style="color:indigo;"><a href="tableaux.php">Voir les tableaux</a></h2>
 		</div>

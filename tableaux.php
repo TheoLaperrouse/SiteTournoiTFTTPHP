@@ -1,4 +1,5 @@
 <!DOCTYPE HTML>
+<?php include "functions.php"; ?>
 <html>
 <head>
 	<title>Les Tableaux</title>
@@ -7,17 +8,6 @@
 	<link rel="stylesheet" href="./assets/css/main.css" />
 	<link rel="icon" type="image/png" href="./favicon.png">
 </head>
-<?php
-	function getPlace($tab)
-	{
-		$cnx = mysqli_connect("db", "user", "test", "myDb");
-		$sql = "SELECT count(*) as nbInscrits FROM $tab";
-		$result = mysqli_query($cnx, $sql);
-		$row = mysqli_fetch_assoc($result);
-		echo $row['nbInscrits'];
-		mysqli_close($cnx);
-	}
-?>
 <body>
 	<div id="wrapper" class="fade-in">
 		<div id="intro">
@@ -47,9 +37,7 @@
 					<td><a href="tableau.php?tab=tableauA" class="link">A</a></td>
 					<td><a href="tableau.php?tab=tableauA" class="link">NC à 13(&lsaquo;1399)</a></td>
 					<td>
-						<?php
-						getPlace("tableauA")
-						?>/72
+						<?php echo getPlace("tableauA"); ?>/72
 					</td>
 					<td>10€</td>
 					<td>15€</td>
@@ -61,9 +49,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauB" class="link">B</a></td>
 					<td><a href="tableau.php?tab=tableauB" class="link">NC à 8(&lsaquo;899)</a></td>
-					<td><?php
-						getPlace("tableauB")
-						?>/72</td>
+					<td><?php echo getPlace("tableauB"); ?>/72</td>
 					<td>5€</td>
 					<td>10€</td>
 					<td>20€</td>
@@ -74,9 +60,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauC" class="link">C</a></td>
 					<td><a href="tableau.php?tab=tableauC" class="link">NC à 18(&lsaquo;1899)</a> </td>
-					<td><?php
-						getPlace("tableauC")
-						?>
+					<td><?php echo getPlace("tableauC"); ?>
 						/72</td>
 					<td>10€</td>
 					<td>20€</td>
@@ -88,9 +72,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauD" class="link">D</a></td>
 					<td><a href="tableau.php?tab=tableauD" class="link">NC à 11(&lsaquo;1199)</a> </td>
-					<td><?php
-						getPlace("tableauD")
-						?>/72</td>
+					<td><?php echo getPlace("tableauD"); ?>/72</td>
 					<td>5€</td>
 					<td>10€</td>
 					<td>20€</td>
@@ -101,9 +83,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauE" class="link">E</a></td>
 					<td><a href="tableau.php?tab=tableauE" class="link">NC à 15(&lsaquo;1599)</a> </td>
-					<td><?php
-						getPlace("tableauE")
-						?>/72</td>
+					<td><?php echo getPlace("tableauE"); ?>/72</td>
 					<td>10€</td>
 					<td>15€</td>
 					<td>30€</td>
@@ -114,9 +94,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauF" class="link">F</a></td>
 					<td><a href="tableau.php?tab=tableauF" class="link">NC à n°1001</a></td>
-					<td><?php
-						getPlace("tableauF")
-						?>/72</td>
+					<td><?php echo getPlace("tableauF"); ?>/72</td>
 					<td>15€</td>
 					<td>25€</td>
 					<td>50€</td>
@@ -127,9 +105,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauG" class="link">G</a></td>
 					<td><a href="tableau.php?tab=tableauG" class="link">Benjamins et Minimes</a></td>
-					<td><?php
-						getPlace("tableauG")
-						?>/36</td>
+					<td><?php echo getPlace("tableauG"); ?>/36</td>
 					<td>Lots</td>
 					<td>Lots</td>
 					<td>Lots</td>
@@ -140,9 +116,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauH" class="link">H</a></td>
 					<td><a href="tableau.php?tab=tableauH" class="link">NC à 14(&lsaquo;1499)</a></td>
-					<td><?php
-						getPlace("tableauH")
-						?>/72</td>
+					<td><?php echo getPlace("tableauH"); ?>/72</td>
 					<td>10€</td>
 					<td>15€</td>
 					<td>30€</td>
@@ -153,9 +127,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauI" class="link">I</a></td>
 					<td><a href="tableau.php?tab=tableauI" class="link">NC à 9(&lsaquo;999)</a></td>
-					<td><?php
-						getPlace("tableauI")
-						?>/72</td>
+					<td><?php echo getPlace("tableauI"); ?>/72</td>
 					<td>5€</td>
 					<td>10€</td>
 					<td>20€</td>
@@ -166,9 +138,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauJ" class="link">J</a></td>
 					<td><a href="tableau.php?tab=tableauJ" class="link">NC à n°300</a></td>
-					<td><?php
-						getPlace("tableauJ")
-						?>/72</td>
+					<td><?php echo getPlace("tableauJ"); ?>/72</td>
 					<td>15€</td>
 					<td>30€</td>
 					<td>70€</td>
@@ -179,9 +149,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauK" class="link">K</a></td>
 					<td><a href="tableau.php?tab=tableauK" class="link">NC à 12(&lsaquo;1299)</a></td>
-					<td><?php
-						getPlace("tableauK")
-						?>/72</td>
+					<td><?php echo getPlace("tableauK"); ?>/72</td>
 					<td>10€</td>
 					<td>20€</td>
 					<td>40€</td>
@@ -193,9 +161,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauL" class="link">L</a></td>
 					<td><a href="tableau.php?tab=tableauL" class="link">NC à 17(&lsaquo;1799)</a></td>
-					<td><?php
-						getPlace("tableauL")
-						?>/72</td>
+					<td><?php echo getPlace("tableauL"); ?>/72</td>
 					<td>10€</td>
 					<td>20€</td>
 					<td>40€</td>
@@ -206,9 +172,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauM" class="link">M</a></td>
 					<td><a href="tableau.php?tab=tableauM" class="link">Toutes Catégories Messieurs</a></td>
-					<td><?php
-						getPlace("tableauM")
-						?>/72</td>
+					<td><?php echo getPlace("tableauM"); ?>/72</td>
 					<td>30€</td>
 					<td>60€</td>
 					<td>120€</td>
@@ -219,9 +183,7 @@
 				<tr>
 					<td><a href="tableau.php?tab=tableauN" class="link">N</a></td>
 					<td><a href="tableau.php?tab=tableauN" class="link">Elite Dames TC</a></td>
-					<td><?php
-						getPlace("tableauN")
-						?>/36</td>
+					<td><?php echo getPlace("tableauN"); ?>/36</td>
 					<td>10€</td>
 					<td>20€</td>
 					<td>40€</td>
@@ -244,15 +206,12 @@
 		</div>
 
 	</div>
-
-	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/skel.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-
 </body>
 
 </html>

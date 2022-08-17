@@ -11,18 +11,10 @@
 	<div id="wrapper" class="fade-in">
 		<div id="intro">
 			<?php
-						$cnx = mysqli_connect("db", "user", "test", "myDb");
-			if (mysqli_connect_errno())
-			{
-				echo 'Failed to connect to mysql';
-			}
-			$tableau = strip_tags($_GET['tab']);
-			echo '<h1>';
-			$titre = substr_replace($tableau, ' ', 7, 0);
-			echo $titre;
-			echo '</h1>';
-
-			?>
+				$tab = strip_tags($_GET["tab"]);
+				$titre = substr_replace($tab, " ", 7, 0);
+				echo "<h1> $titre </h1>";
+   			?>
 			<ul class="actions">
 				<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Voir les tableaux</a></li>
 			</ul>
@@ -30,19 +22,10 @@
 		<header id="header">
 			<a href="./tableaux.php" class="logo">Retournez aux tableaux</a>
 		</header>
-
-		<!-- Main -->
 		<div id="main">
 			<?php
-			$req = "SELECT `prenom`, `nom`, `nombrePoints`, `club` FROM $tableau ORDER BY `nombrePoints` DESC";
-			$res = $cnx->query($req);
-			echo "<table>";
-			echo "<tr><th>Nom</th><th>Prénom</th><th>Nombre de Points</th><th>Club</th>";
-			while ($data = mysqli_fetch_array($res)) {
-				echo '<tr><td>' . $data['nom'] . '</td><td>' . $data['prenom'] . '</td><td>' . $data['nombrePoints'] . '</td><td>' . $data['club'] . '</td></tr>';
-			}
-			echo "</table>";
-			mysqli_close($cnx);
+				include "functions.php";
+				printArrayPlayers($tab);
 			?>
 		</div>
 		<div id="copyright">
