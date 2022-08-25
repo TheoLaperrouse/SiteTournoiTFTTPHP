@@ -150,11 +150,11 @@
 					<td><a href="tableau.php?tab=tableauK" class="link">K</a></td>
 					<td><a href="tableau.php?tab=tableauK" class="link">NC à 12(&lsaquo;1299)</a></td>
 					<td><?php echo getPlace("tableauK"); ?>/72</td>
+					<td>5€</td>
 					<td>10€</td>
 					<td>20€</td>
 					<td>40€</td>
-					<td>80€</td>
-					<td>8€</td>
+					<td>7€</td>
 					<td>Dim. 12H00</td>
 				</tr>
 
