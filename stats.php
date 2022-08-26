@@ -23,7 +23,8 @@
 				include "functions.php";
                 $distinctPlayers = execSqlFile("sql/getAllDistinctPlayers.sql");
                 $nbInscript = execSqlFile("sql/getTotalInscriptions.sql");
-				echo "<h3>Nombre d'inscriptions : $nbInscript<br>Nombre de joueurs différents: $distinctPlayers</h3>";
+                $nbNumero = execSqlFile("sql/getTotalNumero.sql");
+				echo "<h4 class='center'>Nombre d'inscriptions : $nbInscript<br>Nombre de joueurs différents: $distinctPlayers<br>Nombre de joueurs numérotés: $nbNumero</h4>";
 			?>
 		</div>
 		<div id="copyright">
