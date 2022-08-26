@@ -26,6 +26,13 @@ Créer les tableaux en exécutant la requête sql dans le fichier `createTableTo
 
 L'application est alors disponible et fonctionnelle sur http://localhost:80
 
-## Améliorations à apporter :
+## Export des feuilles de tableau depuis PHPMyAdmin
 
-- Accès au tableau des participants plus visible
+- Se connnecter à PhpMyAdmin
+- Aller sur la base de données relative au tableau :
+- Exporter
+- Format CSV
+- Sélectionner les tables
+- Séparateur -> ';'
+- Afficher les noms de lignes en première ligne
+- Exporter et fusionner les feuilles

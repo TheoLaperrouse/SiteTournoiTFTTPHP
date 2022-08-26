@@ -71,4 +71,14 @@ function printArrayPlayers($tab)
     echo "</table>";
     mysqli_close($cnx);
 }
+
+function execSqlFile($path)
+{
+    $cnx = connect_db();
+    $sql=file_get_contents($path);
+    $res = $cnx->query($sql);
+    $row = mysqli_fetch_assoc($res);
+    return $row["total"];
+    mysqli_close($cnx);
+}
 ?>
