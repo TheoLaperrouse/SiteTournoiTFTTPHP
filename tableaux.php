@@ -192,6 +192,8 @@
 					<td>Dim. 15H00</td>
 				</tr>
 			</table>
+			<h3 class="center">Nombre d'inscriptions : <?php echo execSqlFile("sql/getTotalInscriptions.sql"); ?>
+			<br>Nombre de joueurs : <?php echo execSqlFile("sql/getAllDistinctPlayers.sql"); ?></h3>
 		</div>
 		<div id="copyright">
 			<ul>
