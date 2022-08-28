@@ -81,4 +81,17 @@ function execSqlFile($path)
     return $row["total"];
     mysqli_close($cnx);
 }
+function getRecipies()
+{
+    global $tabValues;
+    $cnx = connect_db();
+    foreach ($tabValues as $tableauName => $tableauObject) {
+        $sql = "SELECT count(*) as nbInscrits FROM $tableauName";
+        $result = mysqli_query($cnx, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $total += $row["nbInscrits"] * $tableauObject["prixInscript"]; 
+    }
+    return $total;
+    mysqli_close($cnx);
+}
 ?>

@@ -21,10 +21,13 @@
 		<div id="main">
 			<?php
 				include "functions.php";
+				
                 $distinctPlayers = execSqlFile("sql/getAllDistinctPlayers.sql");
                 $nbInscript = execSqlFile("sql/getTotalInscriptions.sql");
+				$meanTab =  number_format($nbInscript / $distinctPlayers,2);
                 $nbNumero = execSqlFile("sql/getTotalNumero.sql");
-				echo "<h4 class='center'>Nombre d'inscriptions : $nbInscript<br>Nombre de joueurs différents: $distinctPlayers<br>Nombre de joueurs numérotés: $nbNumero</h4>";
+                $recipies = getRecipies();
+				echo "<h4 class='center'>Nombre d'inscriptions : $nbInscript<br>Nombre de joueurs différents : $distinctPlayers<br>Moyenne de tableau/joueur : $meanTab<br>Nombre de joueurs numérotés : $nbNumero<br>Recette des inscriptions : $recipies €</h4>";
 			?>
 		</div>
 		<div id="copyright">
