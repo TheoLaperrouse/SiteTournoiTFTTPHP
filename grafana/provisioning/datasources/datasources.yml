@@ -1,0 +1,15 @@
+apiVersion: 1
+
+datasources:
+  - name: postgres
+    type: postgres
+    password: test
+    user: user
+    database: myDb
+    basicAuth: false
+    jsonData:
+      sslmode: disable
+    version: 1
+    editable: true
+
+
