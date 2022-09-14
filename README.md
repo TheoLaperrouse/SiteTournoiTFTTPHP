@@ -28,11 +28,10 @@ L'application est alors disponible et fonctionnelle sur http://localhost:80
 
 ## Export des feuilles de tableau depuis PHPMyAdmin
 
-- Se connnecter à PhpMyAdmin
+- Se connecter à PhpMyAdmin
 - Aller sur la base de données relative au tableau :
 - Exporter
 - Format CSV
 - Sélectionner les tables
-- Séparateur -> ';'
 - Afficher les noms de lignes en première ligne
-- Exporter et fusionner les feuilles
+- Utiliser le script `exportTableaux.py`
