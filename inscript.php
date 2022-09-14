@@ -26,7 +26,7 @@
 
                     $nom = strip_tags($_POST["nom"]);
                     $prenom = strip_tags($_POST["prenom"]);
-                    $club = strip_tags($_POST["nomClub"]);
+                    $club = strip_tags($_POST["club"]);
                     $nbrePts = strip_tags($_POST["nbrePts"]);
                     $tab1 = strip_tags($_POST["tabSam1"]);
                     $tab2 = strip_tags($_POST["tabSam2"]);

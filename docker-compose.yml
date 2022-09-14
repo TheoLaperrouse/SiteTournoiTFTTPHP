@@ -40,5 +40,17 @@ services:
    MYSQL_USER: user
    MYSQL_PASSWORD: test
    MYSQL_ROOT_PASSWORD: test
+ grafana:
+    build: grafana
+    environment:
+        STACK_NAME: ${STACK_NAME}
+        GF_SECURITY_ADMIN_USER: admin
+        GF_SECURITY_ADMIN_PASSWORD: adminP
+        GF_PATHS_PROVISIONING: "/app-grafana/provisioning"
+    ports:
+        - "9110:3000"
+    networks:
+        - default
+
 volumes:
     persistent:

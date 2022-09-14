@@ -24,8 +24,7 @@ function inscriptTab($prenom, $nom, $nbrePts, $numLicence, $club, $tableaux)
                 $ptsMax = $tabValues[$tableau]["ptsMax"];
                 $place = $tabValues[$tableau]["place"];
                 if ($row["nbInscrits"] >= $place) {
-                    echo $row["nbInscrits"];
-                    echo "<h2 class='center'>Le tableau $nameTab est complet</h2>";
+                    echo "<h2 class='center'>Le tableau $nameTab est complet, inscription non validée pour ce tableau</h2>";
                 } elseif ($nbrePts < $ptsMax) {
                     $res = $cnx->query($sql);
                     echo "<h2 class='center'>Vous êtes inscrit au tableau $nameTab</h2>";
