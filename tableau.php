@@ -1,7 +1,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Tableau</title>
+	<title>
+		<?php
+			$tab = strip_tags($_GET["tab"]);
+			$titre = substr_replace($tab, " ", 7, 0);
+			echo "<h1> $titre </h1>";
+		?>
+	</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="./assets/css/main.css" />
