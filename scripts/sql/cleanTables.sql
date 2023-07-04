@@ -1,0 +1,14 @@
+DELETE FROM `tableauA`;
+DELETE FROM `tableauB`;
+DELETE FROM `tableauC`;
+DELETE FROM `tableauD`;
+DELETE FROM `tableauE`;
+DELETE FROM `tableauF`;
+DELETE FROM `tableauG`;
+DELETE FROM `tableauH`;
+DELETE FROM `tableauI`;
+DELETE FROM `tableauJ`;
+DELETE FROM `tableauK`;
+DELETE FROM `tableauL`;
+DELETE FROM `tableauM`;
+DELETE FROM `tableauN`;
