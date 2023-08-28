@@ -26,12 +26,29 @@ Créer les tableaux en exécutant la requête sql dans le fichier `createTableTo
 
 L'application est alors disponible et fonctionnelle sur http://localhost:80
 
-## Export des feuilles de tableau depuis PHPMyAdmin
+## Clôture des inscriptions
 
-- Se connecter à PhpMyAdmin
-- Aller sur la base de données relative au tableau :
-- Exporter
-- Format CSV
-- Sélectionner les tables
-- Afficher les noms de lignes en première ligne
-- Utiliser le script `exportTableaux.py`
+### Export depuis PhpMyAdmin
+
+1. Se connecter à PhpMyAdmin
+2. Se rendre dans l'onglet Exporter
+3. Mode avancée
+4. Custom - display all possible options
+5. Décocher les table inutiles pour ne garder que les tables relatives au tournoi 'tableauA' jusqu'à tableauN (Vous pouvez passer par la première ligne du tableau pour ne pas à avoir à tout désélectionner)
+6. Changer le format en CSV
+7. Renseigner le champ :
+  - Lines terminated with -> ';' au lieu de ','
+
+### Modification pour envoi (Python)
+
+1. Enregistrer et renommer l'export en 'thorigne.csv' et le mettre dans le même dossier que le script de modification, à savoir `scripts/python/exportTableaux.py`
+2. Installer les dépendances du script : `pip install -r requirements.txt`
+3. Lancer le script : `python3 exportTableaux.py` ou `python exportTableaux.py`
+4. Récupérer le fichier xlsx, vérifier les informations et envoyer
+
+### Fermeture des inscriptions (FTP)
+
+1. Se connecter via FTP
+2. Supprimer /tournoi/inscript.php et /tournoi/index.html
+3. Renommer finInscript.html en index.html
+

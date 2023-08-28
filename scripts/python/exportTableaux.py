@@ -13,9 +13,9 @@ if __name__ == '__main__':
     table_names = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N']
     name_compteur,column_compteur,row_compteur = [0, 0, 0]
     with open('thorigne.csv') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+        reader = csv.reader(csvfile, delimiter=';', quotechar='"')
         for row in reader:
-            if(row.__contains__('numLicence')):
+            if('numLicence' in row):
                 worksheet = None
                 worksheet = workbook.add_worksheet(f'Tableau{table_names[name_compteur]}')         
                 name_compteur += 1
@@ -23,6 +23,6 @@ if __name__ == '__main__':
                 write_line(worksheet, 0, row)  
                 row_compteur = 1
             else :
-                write_line(worksheet,row_compteur, row)  
+                write_line(worksheet, row_compteur, row)  
                 row_compteur += 1
     workbook.close()
