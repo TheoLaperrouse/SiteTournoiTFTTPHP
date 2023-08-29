@@ -1,27 +1,3 @@
-SET @num_license = '3524012';
-SET @tableauDepart = 'tableauA';
-SET @tableauArrivee = 'tableauC';
-
-SET @sql = '';
-
-SET @sql = CONCAT('
-    INSERT INTO ', @tableauArrivee, ' (numLicence, prenom, nom, nombrePoints, club)
-    SELECT *
-    FROM ', @tableauDepart, '
-    WHERE "numLicence" = ''', @num_license, ''';
-');
-
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-SET @sql = CONCAT('
-    DELETE FROM ', @tableauDepart, '
-    WHERE "numLicence" = ''', @num_license, ''';
-');
-
-PREPARE stmt FROM @sql;
-EXECUTE stmt;
-DEALLOCATE PREPARE stmt;
-
-SELECT 'Transfert effectué avec succès.' AS message;
+SET @num_license = 3524012;
+INSERT INTO tableauC (`numLicence`, `prenom`, `nom`, `nombrePoints`, `club`) SELECT * FROM tableauA WHERE `numLicence` = @num_license;
+DELETE FROM tableauA WHERE `numLicence` = @num_license;
