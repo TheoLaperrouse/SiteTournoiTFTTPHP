@@ -1,3 +1,8 @@
+<?php
+	require_once __DIR__ . "/Technique/AutoLoad.php";
+	\Technique\AutoLoad::loadTFTT();
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -17,13 +22,11 @@
 			</ul>
 		</div>
 		<header id="header">
-			<a href="index.html" class="center logo">Inscription</a>
+			<a href="index.php" class="center logo">Inscription</a>
 		</header>
 		<div id="main">
 			<article>
 				<?php
-                    include "functions.php";
-
                     $nom = strip_tags($_POST["nom"]);
                     $prenom = strip_tags($_POST["prenom"]);
                     $club = strip_tags($_POST["club"]);
@@ -34,18 +37,10 @@
                     $tab4 = strip_tags($_POST["tabDim2"]);
                     $numLic = strip_tags($_POST["numLic"]);
 
-                    inscriptTab(
-                        $prenom,
-                        $nom,
-                        $nbrePts,
-                        $numLic,
-                        $club,
-                        [$tab1, $tab2, $tab3, $tab4],
-                        $cnx
-                    );
+                    Functions::inscriptTab($prenom,$nom,$nbrePts,$numLic,$club,[$tab1, $tab2, $tab3, $tab4]);
                 ?>
 				<br>
-				<h2 class="center" style="color:indigo;"><a href="tableaux.php">Voir les tableaux</a></h2>
+				<h2 class="center" style="color:indigo;"><a href="./tableaux.php">Voir les tableaux</a></h2>
 		</div>
 		<div id="copyright">
 			<ul>

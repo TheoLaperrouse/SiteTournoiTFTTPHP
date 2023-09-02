@@ -1,13 +1,12 @@
+<?php
+	require_once __DIR__ . "/Technique/AutoLoad.php";
+	\Technique\AutoLoad::loadTFTT();
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>
-		<?php
-			$tab = strip_tags($_GET["tab"]);
-			$titre = substr_replace($tab, " ", 7, 0);
-			echo "<h1> $titre </h1>";
-		?>
-	</title>
+	<title>Tableau</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="./assets/css/main.css" />
@@ -30,8 +29,7 @@
 		</header>
 		<div id="main">
 			<?php
-				include "functions.php";
-				printArrayPlayers($tab);
+				Functions::printArrayPlayers($tab);
 			?>
 		</div>
 		<div id="copyright">
@@ -55,4 +53,5 @@
 	<script src="assets/js/main.js"></script>
 
 </body>
+
 </html>

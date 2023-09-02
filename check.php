@@ -1,7 +1,21 @@
+<?php
+	require_once __DIR__ . "/Technique/AutoLoad.php";
+	\Technique\AutoLoad::loadTFTT();
+	
+	if (!isset($_POST["numLicence"])) {
+		include('Template/check.html');
+	} else {
+		$arr = Functions::getTableauxLicence($_POST["numLicence"]) ;
+		if ($arr["status"] == "KO") {
+			include('Template/checkKO.html');
+		} else {
+			$aTableaux = $arr["tableaux"] ;
+		?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Les Stats du tournoi</title>
+	<title>Votre Inscription</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="./assets/css/main.css" />
@@ -10,25 +24,22 @@
 <body class="is-loading">
 	<div id="wrapper" class="fade-in">
 		<div id="intro">
-            <h1> Les stats </h1>
+			<h1>Votre inscription</h1>
+			<p>au tournoi de Tennis de Table de Thorigné Fouillard</p>
 			<ul class="actions">
-				<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Voir les tableaux</a></li>
+				<li><a href="#header" class="button icon solo fa-arrow-down scrolly">Voir</a></li>
 			</ul>
 		</div>
 		<header id="header">
-			<a href="./tableaux.php" class="logo">Retournez aux tableaux</a>
+			<a href="index.php" class="center logo">Accueil</a>
 		</header>
 		<div id="main">
-			<?php
-				include "functions.php";
-				
-                $distinctPlayers = execSqlFile("sql/getAllDistinctPlayers.sql");
-                $nbInscript = execSqlFile("sql/getTotalInscriptions.sql");
-				$meanTab =  number_format($nbInscript / $distinctPlayers,2);
-                $nbNumero = execSqlFile("sql/getTotalNumero.sql");
-                $recipies = getRecipies();
-				echo "<h4 class='center'>Nombre d'inscriptions : $nbInscript<br>Nombre de joueurs différents : $distinctPlayers<br>Moyenne de tableau/joueur : $meanTab<br>Nombre de joueurs numérotés : $nbNumero<br>Recette des inscriptions : $recipies €</h4>";
-			?>
+			<article>
+				<?php
+                    foreach($aTableaux as $t) {
+						echo "<h2>".$t."</h2>";
+					}
+                ?>
 		</div>
 		<div id="copyright">
 			<ul>
@@ -41,8 +52,8 @@
 				<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
 			</ul>
 		</div>
+		</article>
 	</div>
-
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
@@ -53,3 +64,9 @@
 </body>
 
 </html>
+<?php
+		}
+	}
+	
+	\Technique\AutoLoad::exitTFTT();
+?>

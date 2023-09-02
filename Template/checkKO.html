@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Verification</title>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+  </head>
+
+  <body class="is-preload">
+    <div id="wrapper" class="fade-in">
+      <header id="header" style="display:block;height:200px;">
+		 <h1 class="center" style='color:red;'>Le numéro de licence est incorrect, réessayez</h1>		
+        <div style="float:left;margin-right:20px;"><a href="index.php" style="font-size:1em;" class="logo">Retourner au formulaire</a></div>
+        <h2 class="center">Vérification inscription</h2>
+      </header>
+      <div id="main">
+        <article>
+          <form method="post" action="check.php">
+            <div class="field">
+              <label for="mail">N&deg; de licence :</label>
+              <input type="text" name="numLicence" id="numLicence" />
+            </div>
+            <div class="center" style="width: 100%">
+              <ul class="actions">
+                <li><input type="submit" value="Verifier" /></li>
+              </ul>
+            </div>
+          </form>
+        </article>
+      </div>
+      <div id="copyright">
+        <ul>
+          <li>&copy; Thorigné Fouillard Tennis de Table</li>
+          <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </div>
+    <script src="./assets/js/jquery.min.js"></script>
+    <script src="./assets/js/jquery.scrollex.min.js"></script>
+    <script src="./assets/js/jquery.scrolly.min.js"></script>
+    <script src="./assets/js/skel.min.js"></script>
+    <script src="./assets/js/util.js"></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
+</html>

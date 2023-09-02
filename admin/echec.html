@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Connexion TFTT</title>
+    <link rel="icon" type="image/png" href="./../favicon.png" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./../assets/css/main.css" />
+  </head>
+
+  <body class="is-preload">
+    <div id="wrapper" class="fade-in">
+      <header id="header">
+		  <h1 class="center" style='color:red;'>Échec de connexion, réessayez</h1>		
+          <h2 class="center">Connexion</h2>
+      </header>
+      <div id="main">
+        <article>
+          <form method="post" action="connexion.php">
+            <div class="field">
+              <label for="mail">Adresse mail :</label>
+              <input type="text" name="mail" id="mail" value="<?php echo $_POST['mail']; ?>"/>
+            </div>
+            <div class="field">
+              <label for="password">Mot de passe :</label>
+              <input type="password" name="password" id="password" />
+            </div>
+            <div class="center" style="width: 100%">
+              <ul class="actions">
+                <li><input type="submit" value="Se connecter" /></li>
+                <li><a href="./../index.php" class="logo">Retour</a></li>
+              </ul>
+            </div>
+          </form>
+        </article>
+      </div>
+      <div id="copyright">
+        <ul>
+          <li>&copy; Thorigné Fouillard Tennis de Table</li>
+          <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+      </div>
+    </div>
+    <script src="./../assets/js/jquery.min.js"></script>
+    <script src="./../assets/js/jquery.scrollex.min.js"></script>
+    <script src="./../assets/js/jquery.scrolly.min.js"></script>
+    <script src="./../assets/js/skel.min.js"></script>
+    <script src="./../assets/js/util.js"></script>
+    <script src="./../assets/js/main.js"></script>
+  </body>
+</html>
