@@ -29,7 +29,7 @@ class Tools {
 		file_put_contents(__DIR__ ."/../PJ/codeerror.log", $s. "\n", FILE_APPEND | LOCK_EX);
 		
 		if ($exit) {
-			$arr = array('status' => 'KO', 'message' => utf8_encode('Un problï¿½me est survenu, contactez le service informatique en indiquant le code erreur : ' . $codeErreur));
+			$arr = array('status' => 'KO', 'message' => utf8_encode('Un problème est survenu, contactez le service informatique en indiquant le code erreur : ' . $codeErreur));
 			header('Content-type: application/json');
 			echo json_encode($arr);
 			\Technique\AutoLoad::exitGeneric();
@@ -38,6 +38,9 @@ class Tools {
 	public static function logSqlError(&$bdd, $message = '', $exit = true, $showSql = true) {
 		$codeErreur = rand();
 		$trace = debug_backtrace();
+		//$trace = array_reverse($trace);
+		// array_shift($trace); // remove {main}
+		// array_pop($trace); // remove call to this method
 		$aT = array() ;
 		if ($trace != null) {
 			foreach($trace as $t) {
@@ -54,7 +57,7 @@ class Tools {
 			file_put_contents(__DIR__ ."/../PJ/sqlerror.log", date("Y-m-d H:i:s") . " - ". \BDD\MySQL::$lastSQL. "\n", FILE_APPEND | LOCK_EX);
 		}
 		if ($exit) {
-			$arr = array('status' => 'KO', 'message' => utf8_encode('Un problï¿½me est survenu, contactez le service informatique en indiquant le code erreur : ' . $codeErreur));
+			$arr = array('status' => 'KO', 'message' => utf8_encode('Un problème est survenu, contactez le service informatique en indiquant le code erreur : ' . $codeErreur));
 			header('Content-type: application/json');
 			echo json_encode($arr);
 			\Technique\AutoLoad::exitGeneric();
@@ -92,10 +95,10 @@ class Tools {
 	public static function removeTableLiDotsMPDF($html) {
 		$dom = new DOMDocument();
 		libxml_use_internal_errors(true);
-		$dom->loadHTML($html);
+		$dom->loadHTML($html); // loads your html
 		$xpath = new DOMXPath($dom);
-		$nodes = $xpath->query('//table//*[@class="divLiDot"]');
-		foreach ($nodes as $node) { 
+		$nodes = $xpath->query('//table//*[@class="divLiDot"]'); // find your image
+		foreach ($nodes as $node) {   // Iterate over found elements		
 			$node->parentNode->removeChild($node);
 		}
 		$output = $dom->saveHTML();                  
@@ -104,10 +107,10 @@ class Tools {
 	public static function replaceImageHTML($html) {
 		$dom = new DOMDocument();
 		libxml_use_internal_errors(true);
-		$dom->loadHTML($html);
+		$dom->loadHTML($html); // loads your html
 		$xpath = new DOMXPath($dom);
-		$nodes = $xpath->query("//img");
-		foreach ($nodes as $node) {  
+		$nodes = $xpath->query("//img"); // find your image
+		foreach ($nodes as $node) {   // Iterate over found elements		
 			$value = $node->attributes->getNamedItem('src')->nodeValue;
 			
 			$domaine = "www.factornet.aqua.local" ;
@@ -124,77 +127,101 @@ class Tools {
 			}
 			
 			if (!self::startsWith($value,'data:image') && !self::startsWith($value,'blob:') && !self::startsWith($value,'PJ')) {
+				//echo "src toto =$value ". self::startsWith($value,'PJ') ." new startsWith " . strpos($value, 'PJ') . " \n";
+				//$contents = file_get_contents($value);
+				//echo "contents=$contents\n";
 				if ($value === null || trim($value) == "") {
 					$uri = GestionImage::data_uri(__DIR__ . "/../assets/images/vide.png") ;
 				} else {
 					$uri = GestionImage::data_uri($value) ;
+					//file_put_contents(__DIR__ . "/../PJ/imagesConversion.log",'FROM URL' . $value . ' => ' . $uri. "\n", FILE_APPEND | LOCK_EX) ;
 					if ($uri === false) {
 						$uri = GestionImage::data_uri(__DIR__ . "/../assets/images/vide.png") ;
 					}
 				}
 				$node->attributes->getNamedItem('src')->nodeValue = $uri ;
+				//echo "uri=$uri\n";
 			} else if (self::startsWith($value,'PJ')) {
 				$value = __DIR__ . "/../" . $value ;
 				if (file_exists($value)) {
+					// $contents = file_get_contents($value);
+					// echo "src2=$value\n";
+					// echo "contents=$contents\n";
 					$uri = GestionImage::data_uri($value) ;
+					//file_put_contents(__DIR__ . "/../PJ/imagesConversion.log",'FROM PATH' . $value . ' => ' . $uri. "\n", FILE_APPEND | LOCK_EX) ;
 					$node->attributes->getNamedItem('src')->nodeValue = $uri ;
 				
+				} else {
+					//echo "file not exists = $value\n";
 				}
+				
 			} else if ($value === null && $value == "") {
 				$node->parentNode->removeChild($node);
 				
-			} 
+			} else { 
+			}
 		}
 		$output = $dom->saveHTML();                  
 		return $output ;
 	}
 	public static function removeAttributesHTML($html) {
-		$aExclude = array('img','td','br');
+		$aExclude = array('img','td','br') ; // 'br'
 		$html = str_replace('float:left;','display:inline-block;',$html);
 		$html = str_replace('float: left;','display:inline-block;',$html);
 		$html = str_replace('calc(100% - 30px);','90%;',$html);
-		$dom = new DOMDocument;
+		$dom = new DOMDocument;                 // init new DOMDocument
 		libxml_use_internal_errors(true);
 		$dom->loadHTML($html);
-		$xpath = new DOMXPath($dom);
-		$nodes = $xpath->query('//*');
-		foreach ($nodes as $node) { 
+		$xpath = new DOMXPath($dom);                  // load HTML into it
+		$nodes = $xpath->query('//*');  // Find elements with a style attribute
+		foreach ($nodes as $node) {              // on enleve les balises vides
 			if (trim($node->nodeValue) == '' && !in_array($node->nodeName,$aExclude)) {
+				//echo $node->nodeName ."\n";
 				$node->parentNode->removeChild($node);
 			}
 		}
-		$nodes = $xpath->query('//*[@data-mce-src]');
-		foreach ($nodes as $node) {            
-			$node->removeAttribute('data-mce-src');    
+		// while (($node_list = $xpath->query('//*[not(node())]')) && $node_list->length) { //'//*[not(node())]'
+			// foreach ($node_list as $node) {
+				// echo $node->nodeName ."\n";
+				// $node->parentNode->removeChild($node); //remove empty tags
+			// }
+		// }
+		// $nodes = $xpath->query('//*[@style]');  // Find elements with a style attribute
+		// foreach ($nodes as $node) {              // Iterate over found elements
+			// $node->removeAttribute('style');    // Remove style attribute
+		// }
+		$nodes = $xpath->query('//*[@data-mce-src]');  // Find elements with a style attribute
+		foreach ($nodes as $node) {              // Iterate over found elements
+			$node->removeAttribute('data-mce-src');    // Remove style attribute
 		}
-		$nodes = $xpath->query('//*[@data-mce-style]');  
-		foreach ($nodes as $node) {           
-			$node->removeAttribute('data-mce-style');  
+		$nodes = $xpath->query('//*[@data-mce-style]');  // Find elements with a style attribute
+		foreach ($nodes as $node) {              // Iterate over found elements
+			$node->removeAttribute('data-mce-style');    // Remove style attribute
 		}
-		$nodes = $xpath->query('//li[@style]');
+		$nodes = $xpath->query('//li[@style]');  // remove display:inline-block pour la balise LI
 		foreach ($nodes as $node) {              
 			$node->removeAttribute('style');
 		}
-		$nodes = $xpath->query('//ul/li'); 
+		$nodes = $xpath->query('//ul/li');  // add class nunito to UL
 		foreach ($nodes as $node){
 			$node->removeAttribute('style'); 
 			$node->setAttribute('class', 'linunito');
 		}
-		$nodes = $xpath->query('//ul/li/span[@style]'); 
+		$nodes = $xpath->query('//ul/li/span[@style]');  // add class nunito to UL
 		foreach ($nodes as $node){
 			$node->removeAttribute('style'); 
 			$node->setAttribute('class', 'spannunito');
 		}
-		$nodes = $xpath->query('//ul/li/div[@style]');
+		$nodes = $xpath->query('//ul/li/div[@style]');  // add class nunito to UL
 		foreach ($nodes as $node){
 			$node->removeAttribute('style'); 
 			$node->setAttribute('class', 'spannunito');
 		}
-		$nodes = $xpath->query('//ul/li/div/span[@style]');
+		$nodes = $xpath->query('//ul/li/div/span[@style]');  // add class nunito to UL
 		foreach ($nodes as $node){
 			$node->removeAttribute('style'); 
 		}
-		$nodes = $xpath->query('//ul');
+		$nodes = $xpath->query('//ul');  // add class nunito to UL
 		foreach ($nodes as $node){
 			$node->setAttribute('class', 'nunito black');
 		}
@@ -296,23 +323,23 @@ class Tools {
 		return $field ;
 	}
 	public static function stripAccents_new($string){
-		return strtr($string,'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+		return strtr($string,'àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ','aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
 	}
 	public static function strToNoAccent($var) {
 		$var = str_replace(
 			array(
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½',
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 
-				'ï¿½', 'ï¿½', 'ï¿½',
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½',
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 
-				'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 
-				'ï¿½', 'ï¿½', 'ï¿½', 
+				'à', 'â', 'ä', 'á', 'ã', 'å',
+				'î', 'ï', 'ì', 'í', 
+				'ô', 'ö', 'ò', 'ó', 'õ', 'ø', 
+				'ù', 'û', 'ü', 'ú', 
+				'é', 'è', 'ê', 'ë', 
+				'ç', 'ÿ', 'ñ',
+				'À', 'Â', 'Ä', 'Á', 'Ã', 'Å',
+				'Î', 'Ï', 'Ì', 'Í', 
+				'Ô', 'Ö', 'Ò', 'Ó', 'Õ', 'Ø', 
+				'Ù', 'Û', 'Ü', 'Ú', 
+				'É', 'È', 'Ê', 'Ë', 
+				'Ç', 'Ÿ', 'Ñ', 
 			),
 			array(
 				'a', 'a', 'a', 'a', 'a', 'a', 
@@ -338,70 +365,70 @@ class Tools {
 		if (self::seems_utf8( $string ) ) {
 			$chars = array(
 				// Decompositions for Latin-1 Supplement
-				'ï¿½' => 'a',
-				'ï¿½' => 'o',
-				'ï¿½' => 'A',
-				'ï¿½' => 'A',
-				'ï¿½' => 'A',
-				'ï¿½' => 'A',
-				'ï¿½' => 'A',
-				'ï¿½' => 'A',
-				'ï¿½' => 'AE',
-				'ï¿½' => 'C',
-				'ï¿½' => 'E',
-				'ï¿½' => 'E',
-				'ï¿½' => 'E',
-				'ï¿½' => 'E',
-				'ï¿½' => 'I',
-				'ï¿½' => 'I',
-				'ï¿½' => 'I',
-				'ï¿½' => 'I',
-				'ï¿½' => 'D',
-				'ï¿½' => 'N',
-				'ï¿½' => 'O',
-				'ï¿½' => 'O',
-				'ï¿½' => 'O',
-				'ï¿½' => 'O',
-				'ï¿½' => 'O',
-				'ï¿½' => 'U',
-				'ï¿½' => 'U',
-				'ï¿½' => 'U',
-				'ï¿½' => 'U',
-				'ï¿½' => 'Y',
-				'ï¿½' => 'TH',
-				'ï¿½' => 's',
-				'ï¿½' => 'a',
-				'ï¿½' => 'a',
-				'ï¿½' => 'a',
-				'ï¿½' => 'a',
-				'ï¿½' => 'a',
-				'ï¿½' => 'a',
-				'ï¿½' => 'ae',
-				'ï¿½' => 'c',
-				'ï¿½' => 'e',
-				'ï¿½' => 'e',
-				'ï¿½' => 'e',
-				'ï¿½' => 'e',
-				'ï¿½' => 'i',
-				'ï¿½' => 'i',
-				'ï¿½' => 'i',
-				'ï¿½' => 'i',
-				'ï¿½' => 'd',
-				'ï¿½' => 'n',
-				'ï¿½' => 'o',
-				'ï¿½' => 'o',
-				'ï¿½' => 'o',
-				'ï¿½' => 'o',
-				'ï¿½' => 'o',
-				'ï¿½' => 'o',
-				'ï¿½' => 'u',
-				'ï¿½' => 'u',
-				'ï¿½' => 'u',
-				'ï¿½' => 'u',
-				'ï¿½' => 'y',
-				'ï¿½' => 'th',
-				'ï¿½' => 'y',
-				'ï¿½' => 'O',
+				'ª' => 'a',
+				'º' => 'o',
+				'À' => 'A',
+				'Á' => 'A',
+				'Â' => 'A',
+				'Ã' => 'A',
+				'Ä' => 'A',
+				'Å' => 'A',
+				'Æ' => 'AE',
+				'Ç' => 'C',
+				'È' => 'E',
+				'É' => 'E',
+				'Ê' => 'E',
+				'Ë' => 'E',
+				'Ì' => 'I',
+				'Í' => 'I',
+				'Î' => 'I',
+				'Ï' => 'I',
+				'Ð' => 'D',
+				'Ñ' => 'N',
+				'Ò' => 'O',
+				'Ó' => 'O',
+				'Ô' => 'O',
+				'Õ' => 'O',
+				'Ö' => 'O',
+				'Ù' => 'U',
+				'Ú' => 'U',
+				'Û' => 'U',
+				'Ü' => 'U',
+				'Ý' => 'Y',
+				'Þ' => 'TH',
+				'ß' => 's',
+				'à' => 'a',
+				'á' => 'a',
+				'â' => 'a',
+				'ã' => 'a',
+				'ä' => 'a',
+				'å' => 'a',
+				'æ' => 'ae',
+				'ç' => 'c',
+				'è' => 'e',
+				'é' => 'e',
+				'ê' => 'e',
+				'ë' => 'e',
+				'ì' => 'i',
+				'í' => 'i',
+				'î' => 'i',
+				'ï' => 'i',
+				'ð' => 'd',
+				'ñ' => 'n',
+				'ò' => 'o',
+				'ó' => 'o',
+				'ô' => 'o',
+				'õ' => 'o',
+				'ö' => 'o',
+				'ø' => 'o',
+				'ù' => 'u',
+				'ú' => 'u',
+				'û' => 'u',
+				'ü' => 'u',
+				'ý' => 'y',
+				'þ' => 'th',
+				'ÿ' => 'y',
+				'Ø' => 'O',
 				// Decompositions for Latin Extended-A
 				'A' => 'A',
 				'a' => 'a',
@@ -419,7 +446,7 @@ class Tools {
 				'c' => 'c',
 				'D' => 'D',
 				'd' => 'd',
-				'ï¿½' => 'D',
+				'Ð' => 'D',
 				'd' => 'd',
 				'E' => 'E',
 				'e' => 'e',
@@ -485,8 +512,8 @@ class Tools {
 				'o' => 'o',
 				'O' => 'O',
 				'o' => 'o',
-				'ï¿½' => 'OE',
-				'ï¿½' => 'oe',
+				'Œ' => 'OE',
+				'œ' => 'oe',
 				'R' => 'R',
 				'r' => 'r',
 				'R' => 'R',
@@ -499,8 +526,8 @@ class Tools {
 				's' => 's',
 				'S' => 'S',
 				's' => 's',
-				'ï¿½' => 'S',
-				'ï¿½' => 's',
+				'Š' => 'S',
+				'š' => 's',
 				'T' => 'T',
 				't' => 't',
 				'T' => 'T',
@@ -523,13 +550,13 @@ class Tools {
 				'w' => 'w',
 				'Y' => 'Y',
 				'y' => 'y',
-				'ï¿½' => 'Y',
+				'Ÿ' => 'Y',
 				'Z' => 'Z',
 				'z' => 'z',
 				'Z' => 'Z',
 				'z' => 'z',
-				'ï¿½' => 'Z',
-				'ï¿½' => 'z',
+				'Ž' => 'Z',
+				'ž' => 'z',
 				'?' => 's',
 				// Decompositions for Latin Extended-B
 				'?' => 'S',
@@ -537,9 +564,9 @@ class Tools {
 				'?' => 'T',
 				'?' => 't',
 				// Euro Sign
-				'ï¿½' => 'E',
+				'€' => 'E',
 				// GBP (Pound) Sign
-				'ï¿½' => '',
+				'£' => '',
 				// Vowels with diacritic (Vietnamese)
 				// unmarked
 				'O' => 'O',
@@ -894,13 +921,13 @@ class Tools {
 		
 		return $date;
 	}
-	// on rï¿½cupï¿½re le libellï¿½ du mois en fonction d'un numï¿½ro 
+	// on récupère le libellé du mois en fonction d'un numéro 
 	public static function getNomMois($mois) {
 		switch($mois)
 		{
 			case 1 : return "Janvier";
 					break;
-			case 2 : return "FÃ©vrier";
+			case 2 : return "Février";
 					break;
 			case 3 : return "Mars";
 					break;
@@ -912,7 +939,7 @@ class Tools {
 					break;
 			case 7 : return "Juillet";
 					break;
-			case 8 : return "AoÃ»t";
+			case 8 : return "Août";
 					break;
 			case 9 : return "Septembre";
 					break;
@@ -920,7 +947,7 @@ class Tools {
 					break;
 			case 11 : return "Novembre";
 					break;
-			case 12 : return "DÃ©cembre";
+			case 12 : return "Décembre";
 					break;
 			default : return "Incorrect";
 		}
@@ -944,31 +971,31 @@ class Tools {
 		return $csv;
 	}
 	public static function getLibelleEcheance($echeance = 2){
-		if ($echeance == 1) {
-			return "ï¿½ rÃ©ception";
-		} else if ($echeance == 2) {
-			return "ï¿½ 30 jours";
-		} else if ($echeance == 3) {
-			return "ï¿½ 90 jours";
-		} else if ($echeance == 4) {
-			return "ï¿½ 60 jours";
-		} else if ($echeance == 5) {
-			return "ï¿½ 45 jours";
+		if ($echeance == 1) {//à réception
+			return "à réception";
+		} else if ($echeance == 2) {//1 mois
+			return "à 30 jours";
+		} else if ($echeance == 3) {//3 mois
+			return "à 90 jours";
+		} else if ($echeance == 4) {//2 mois
+			return "à 60 jours";
+		} else if ($echeance == 5) {//45 jours
+			return "à 45 jours";
 		} else if ($echeance == 6) {
-			return "ï¿½ 30 jours fin de mois";
+			return "à 30 jours fin de mois";
 		}
-		return "ï¿½ 30 jours";
+		return "à 30 jours";
 	}	
 	public static function getYMDEcheance($echeance = 1){
-		if ($echeance == 1) {
+		if ($echeance == 1) {//à réception
 			return date('Y-m-d',strtotime('+1 day'));
-		} else if ($echeance == 2) {
+		} else if ($echeance == 2) {//1 mois
 			return date('Y-m-d',strtotime('+1 month'));
-		} else if ($echeance == 3) {
+		} else if ($echeance == 3) {//3 mois
 			return date('Y-m-d',strtotime('+3 month'));
-		} else if ($echeance == 4) {
+		} else if ($echeance == 4) {//2 mois
 			return date('Y-m-d',strtotime('+2 month'));
-		} else if ($echeance == 5) {
+		} else if ($echeance == 5) {//45 jours
 			return date('Y-m-d',strtotime('+45 days'));
 		} else if ($echeance == 6) {
 			return self::getYMD30JoursFinDeMois();

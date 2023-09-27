@@ -216,7 +216,9 @@ class SGBD {
 			if (self::$DB_USE_INSTANCE == true) {
 				self::$instance = $cnn ;
 				self::$DB_INSTANCE_NAME = $cnn->_Base ;
+				//file_put_contents(__DIR__ . "/../connexions.log", date("Y-m-d H:i:s") . " : SGBD GetInstance DB_USE_INSTANCE SET INSTANCE " . self::$DB_INSTANCE_NAME . PHP_EOL,FILE_APPEND);
 			}
+			//file_put_contents(__DIR__ . "/../connexions.log", date("Y-m-d H:i:s") . " : SGBD GetInstance NO DB_USE_INSTANCE " . self::$DB_INSTANCE_NAME . PHP_EOL,FILE_APPEND);
 			return $cnn;
 		}
 		return null;

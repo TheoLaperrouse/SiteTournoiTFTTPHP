@@ -8,22 +8,25 @@ class Connection
 	
 	public function __construct($Code)
 	{
+		//On recherche la connexion liée à cette procédure
 		$dom = new \DomDocument();
 		$dom->load("Config/".cst_BDD);
 		$xpath = new \DOMXPath($dom);
 		$root = $dom->documentElement;
+//echo "BDD = " . cst_BDD ;
 		if ($Code == "DEFAULT") {
+			//On choisit la connexion par défaut
 			$nodeDefault = $xpath->evaluate('Default', $root)->item(0);
 			$this->LoadConnectionByNode($nodeDefault);
 		} else {
 			$nodesConnection = $xpath->evaluate('Connection[@Id="'.$Code.'"]', $root);
 			if ($nodesConnection->length == 0)
 			{
-				echo "Aucune connexion ne correspond Ã  ce code.";
+				echo "Aucune connexion ne correspond à ce code.";
 			}
 			else if ($nodesConnection->length > 1)
 			{
-				echo "Plusieurs connexions correspondent Ã  ce code.";
+				echo "Plusieurs connexions correspondent à ce code.";
 			}
 			else
 			{

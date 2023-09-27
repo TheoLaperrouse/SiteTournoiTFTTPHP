@@ -36,7 +36,3 @@ L'application est alors disponible et fonctionnelle sur http://localhost:80
 - Séparateur -> ';'
 - Afficher les noms de lignes en première ligne
 - Exporter et fusionner les feuilles
-
-## Accès à l'interface admin :
-
-Accéder à `/admin/connexion.php`

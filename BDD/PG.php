@@ -52,6 +52,7 @@ class PG extends \BDD\SGBD
 		{
 			echo "ERREUR";
 			exit;
+			//echo mysql_error($this->cnn);
 		} 
 		return $result;
 	}

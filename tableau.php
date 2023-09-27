@@ -34,10 +34,17 @@
 		</div>
 		<div id="copyright">
 			<ul>
-				<li>
-					<h3>Si vous avez un problème avec votre inscription, veuillez me contacter par mail (theolaperrouse@gmail.com) ou par Messenger(<a href="https://www.facebook.com/messages/t/theo.laperrouse"> Théo Laperrouse</a>)</h3>
-				</li>
-			</ul>
+          <li>
+            <h3>
+              Si vous avez un problème avec votre inscription, veuillez me
+              contacter par mail (contact@migratio.fr) ou par Messenger(<a
+                href="https://www.facebook.com/messages/t/stephane.lerouzic.5"
+              >
+                Stéphane Le Rouzic</a
+              >)
+            </h3>
+          </li>
+        </ul>
 			<ul>
 				<li>&copy; Thorigné Fouillard Tennis de Table</li>
 				<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>

@@ -94,6 +94,7 @@ class model_Utilisateur{
 				) {
 				if (startsWith(strtoupper($Fichier),"LOGO")) {
 					$count+=1;
+					//echo "Ficheir trouvé : " . $Fichier . "<br/>" ;
 					$logo = $logoPath . $Fichier ;
 				}
 			}
@@ -112,6 +113,7 @@ class model_Utilisateur{
 			}
 		}		
 		$output_dir .= $domaine;
+		//on regarde si le logo a déjà été déplacé
 		$logo = "" ;
 		
 		$count = 0;
@@ -122,11 +124,13 @@ class model_Utilisateur{
 				) {
 				if (startsWith(strtoupper($Fichier),"LOGO")) {
 					$count+=1;
+					//echo "Ficheir trouvé : " . $Fichier . "<br/>" ;
 					$logo = $output_dir . $Fichier ;
 				}
 			}
 		}    
 		closedir($dossier);
+		//$logo = str_replace("/PJ/ACTUALITE/TEMP/","/ajax/foot/doPJ.php?mode=GET_PJ&type=ACTUALITE&ID=".$actu_id."&fichier=",$commentaire0) ;
 		return $logo ;
 	}
 	function getLogoURL() {
@@ -141,6 +145,7 @@ class model_Utilisateur{
 			}
 		}		
 		$output_dir .= $domaine;
+		//on regarde si le logo a déjà été déplacé
 		$logo = "" ;
 		
 		$count = 0;
@@ -151,6 +156,8 @@ class model_Utilisateur{
 				) {
 				if (startsWith(strtoupper($Fichier),"LOGO")) {
 					$count+=1;
+					//echo "Ficheir trouvé : " . $Fichier . "<br/>" ;
+					//$logo = cst_SITE_URL."/PJ/UTILISATEUR/".$domaine.$Fichier ;
 					$logo = $output_url . $Fichier ;
 				}
 			}
@@ -205,19 +212,27 @@ class model_Utilisateur{
 		$output_dir = __DIR__ ."/../assets/images/";
 		$f = $this->getFileProfil("LOGO") ;
 		if (trim($f) == "") {
+			//Tools::logToFile('avatar.log',$d . " || EMPTY " . $f) ;
 			return 'AbsentSmall.png' ;
 		}
 		
 		$d = $this->getProfilDirectory() ;
 		$fOut = 'avatar'.$h.'_'.$this->row["uti_id"].'.png' ;
+		//Tools::logToFile('avatar.log',$f.$d . " || " . $output_dir . 'joueurs/'.$fOut) ;
 		if (!file_exists($output_dir . 'joueurs/'.$fOut) && file_exists($d.$f)) {
 			if (exif_imagetype($d.$f) == IMAGETYPE_JPEG) {
 				GestionImage::JPG2PNG($d.$f, $output_dir . 'joueurs/temp/'.$fOut) ;
+				//Tools::logToFile("ImportImage.log","[".$f."] : JPG2PNG EXIF = " . exif_imagetype($d.$f)) ;
 			} else {
 				copy($d.$f, $output_dir . 'joueurs/temp/'.$fOut) ;
+				//Tools::logToFile("ImportImage.log","[".$f."] : COPY PNG EXIF = " . exif_imagetype($d.$f)) ;
 			}
 				
 			GestionImage::CreateThumb($output_dir . 'joueurs/temp/'.$fOut, $output_dir . 'joueurs/'.$fOut,$h,$h,true) ;
+		} else if (file_exists($d.$f)) {
+			//Tools::logToFile("ImportImage.log","[".$f."] : ALREADY EXISTS = " . $d.$f) ;
+		}else {	
+			//Tools::logToFile("ImportImage.log","[".$f."] : NOT EXISTS = " . $d.$f) ;
 		}
 		if (file_exists($output_dir . 'joueurs/'.$fOut)) {
 			return 'joueurs/'.$fOut ;
@@ -259,6 +274,7 @@ class model_Utilisateur{
 			}
 		}		
 		$output_dir .= $domaine;
+		//on regarde si le logo a déjà été déplacé
 		$logo = "" ;
 		
 		$count = 0;
@@ -269,6 +285,7 @@ class model_Utilisateur{
 				) {
 				if (startsWith(strtoupper($Fichier),strtoupper($f))) {
 					$count+=1;
+					//echo "Ficheir trouvé : " . $Fichier . "<br/>" ;
 					$logo = $Fichier ;
 				}
 			}

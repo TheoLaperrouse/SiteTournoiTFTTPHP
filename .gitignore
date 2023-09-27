@@ -2,6 +2,7 @@
 /Config
 /Common
 Config.php
+Config-prod.php
 .htaccess
 /Technique/Excel
 /Technique/PHPMailer

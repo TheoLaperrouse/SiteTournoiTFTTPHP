@@ -37,17 +37,24 @@
                     $tab4 = strip_tags($_POST["tabDim2"]);
                     $numLic = strip_tags($_POST["numLic"]);
 
-                    Functions::inscriptTab($prenom,$nom,$nbrePts,$numLic,$club,[$tab1, $tab2, $tab3, $tab4]);
+                    model_Joueur::AddJoueur($prenom,$nom,$nbrePts,$numLic,$club,[$tab1, $tab2, $tab3, $tab4]);
                 ?>
 				<br>
 				<h2 class="center" style="color:indigo;"><a href="./tableaux.php">Voir les tableaux</a></h2>
 		</div>
 		<div id="copyright">
 			<ul>
-				<li>
-					<h3>Si vous avez un problème avec votre inscription, veuillez me contacter par mail (theolaperrouse@gmail.com) ou par Messenger(<a href="https://www.facebook.com/messages/t/theo.laperrouse"> Théo Laperrouse</a>)</h3>
-				</li>
-			</ul>
+          <li>
+            <h3>
+              Si vous avez un problème avec votre inscription, veuillez me
+              contacter par mail (contact@migratio.fr) ou par Messenger(<a
+                href="https://www.facebook.com/messages/t/stephane.lerouzic.5"
+              >
+                Stéphane Le Rouzic</a
+              >)
+            </h3>
+          </li>
+        </ul>
 			<ul>
 				<li>&copy; Thorigné Fouillard Tennis de Table</li>
 				<li>Design: <a href="https://html5up.net">HTML5 UP</a></li>

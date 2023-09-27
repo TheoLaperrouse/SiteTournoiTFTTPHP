@@ -69,7 +69,7 @@ class AutoLoad {
 		if ($except != 'Tableaux') require_once self::$root . "Technique/Tableaux.php";
 		if ($except != 'Functions') require_once self::$root . "Technique/Functions.php";
 		require_once self::$root . "Technique/PHPMailer/vendor/autoload.php";
-		require_once self::$root . "Technique/Excel/vendor/autoload.php";
+		//require_once self::$root . "Technique/Excel/vendor/autoload.php";
 	}
 	public static function UtilsCommon($except = '') {
 		if ($except != 'Mail') require_once self::$root . "Common/Mail.php";
@@ -77,6 +77,8 @@ class AutoLoad {
 	}
 	public static function ModelDivers($except = '') {
 		if ($except != 'Utilisateur') require_once self::$root . "Model/Utilisateur.php";
+		if ($except != 'Joueur') require_once self::$root . "Model/Joueur.php";
+		if ($except != 'Tableau') require_once self::$root . "Model/Tableau.php";
 	}
 }
 ?>

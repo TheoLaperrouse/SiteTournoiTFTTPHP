@@ -20,7 +20,7 @@ class StoredProcedure
 		}
 		else
 		{
-			echo $this->ProcedureName . " : Le paramÃ¨tre '$key' n'existe pas dans le descripteur.";
+			echo $this->ProcedureName . " : Le paramètre '$key' n'existe pas dans le descripteur.";
 			return false;
 		}
 	}
