@@ -201,7 +201,7 @@
 		//Timeout
 		if (Messages.timerId != null) clearTimeout(Messages.timerId) ;
 		Messages.timerId = setTimeout(function(maConv) {
-			var msgAdd = "<br/><br/><div style='color:#117176;font-style:italic;font-weight:700;'>La proc&eacute;dure prend plus de temps que pr&eacute;vu, si vous pensez qu'il s'agit d'un bug, vous pouvez contacter le service informatique<br/>Avant de relancer l'action, v&eacute;rifiez qu'elle ne s'est pas d&eacute;roul&eacute;e correctement en rafraichissant l'onglet</div>" ;
+			var msgAdd = "<br/><br/><div style='color:#117176;font-style:italic;font-weight:700;'>La procédure prend plus de temps que prévu, si vous pensez qu'il s'agit d'un bug, vous pouvez contacter le service informatique<br/>Avant de relancer l'action, vérifiez qu'elle ne s'est pas déroulée correctement en rafraichissant l'onglet</div>" ;
 			msgAdd += "<div id='closeMessageWait' class='btnValide'><i class='menuIcon menuIconClose'></i> Fermer la fen&ecirc;tre</div>" ;
 			$(".msg"+type,$("#mesMessages")).append(msgAdd);
 			$("#closeMessageWait",$(".msg"+type,$("#mesMessages"))).off('click').on('click',function(){
