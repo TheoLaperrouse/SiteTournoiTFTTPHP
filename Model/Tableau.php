@@ -6,7 +6,7 @@ class model_Tableau{
 	public static function getPlaceRestantes($lettre) {
 		$aParams = self::getParamsTableau($lettre);
 		$nb = self::getPlace($lettre);
-		return $nb . " / " . $aParams["NB"] ;
+		return $nb . "/" . $aParams["NB"] ;
 	}
 	public static function getPrixTableau($lettreTableau) {
 		$aParams = self::getParamsTableau($lettreTableau);
@@ -75,17 +75,23 @@ class model_Tableau{
 		array_walk_recursive($row,'encode_items');
 		return $row ;	
 	}
+	public static function formatPrice($price) {
+		if (strpos($price, 'Lots') === false) {
+			return $price . ' €';
+		} 
+		return $price;
+	}
 	public static function getRowTableau($lettreTableau) {
 		$row = self::getParamsTableau($lettreTableau) ;
 		$s= '
 				<tr>
 					<td><a href="tableau.php?tab=tableau'.$lettreTableau.'" class="link">'.$lettreTableau.'</a></td>
 					<td><a href="tableau.php?tab=tableau'.$lettreTableau.'" class="link">'.$row["LIBLONG"].'</a></td>
-					<td>' . self::getPlaceRestantes($lettreTableau) . '</td>
-					<td>'.$row["QUART"].'</td>
-					<td>'.$row["DEMI"].'</td>
-					<td>'.$row["FINALE"].'</td>
-					<td>'.$row["VAINQUEUR"].'</td>
+					<td>'.self::getPlaceRestantes($lettreTableau) . '</td>
+					<td>'.self::formatPrice($row["QUART"]).'</td>
+					<td>'.self::formatPrice($row["DEMI"]).'</td>
+					<td>'.self::formatPrice($row["FINALE"]).'</td>
+					<td>'.self::formatPrice($row["VAINQUEUR"]).'</td>
 					<td>'.$row["PRIX"].'€</td>
 					<td>'.substr($row["JOUR"],0,3).'. '.$row["HEURE"].'</td>
 				</tr>';
