@@ -15,18 +15,21 @@ class Tools {
 		self::$starttime = microtime(true);
 		file_put_contents(__DIR__ ."/../PJ/tunning.log", $action." || " . $elapsed . "\n", FILE_APPEND | LOCK_EX);
 	}
+	public static function logMail($appli,$from,$to,$sujet,$message) {
+		file_put_contents(__DIR__ ."/../logs/mail-".$appli.".log", date("Y-m-d H:i:s") . " FROM " . $from . " TO " . implode(',',$to) . " - " . $sujet . " *** ". $message. " || " . UserInfo::get('UserId') . "\n", FILE_APPEND | LOCK_EX);
+	}
 	public static function l($filename,$message) {
 		self::logToFile($filename,$message) ;
 	}
 	public static function logToFile($filename,$message) {
-		file_put_contents(__DIR__ ."/../PJ/".$filename, date("Y-m-d H:i:s") . " - ".$message." || " . UserInfo::get('UserId') . "\n", FILE_APPEND | LOCK_EX);
+		file_put_contents(__DIR__ ."/../logs/".$filename, date("Y-m-d H:i:s") . " - ".$message." || " . UserInfo::get('UserId') . "\n", FILE_APPEND | LOCK_EX);
 	}
 	public static function logCodeError($e, $message = '', $exit = true) {
 		$codeErreur = rand();
 		$s = nl2br($e->getTraceAsString()) ;
 		$ProcId = md5($s) ;
-		file_put_contents(__DIR__ ."/../PJ/codeerror.log", date("Y-m-d H:i:s") . " - [".$codeErreur." - Id " .$ProcId. "]". $e->getCode() . " - " . $e->getMessage()." || " . UserInfo::get('UserId') . "\n", FILE_APPEND | LOCK_EX);
-		file_put_contents(__DIR__ ."/../PJ/codeerror.log", $s. "\n", FILE_APPEND | LOCK_EX);
+		file_put_contents(__DIR__ ."/../logs/codeerror.log", date("Y-m-d H:i:s") . " - [".$codeErreur." - Id " .$ProcId. "]". $e->getCode() . " - " . $e->getMessage()." || " . UserInfo::get('UserId') . "\n", FILE_APPEND | LOCK_EX);
+		file_put_contents(__DIR__ ."/../logs/codeerror.log", $s. "\n", FILE_APPEND | LOCK_EX);
 		
 		if ($exit) {
 			$arr = array('status' => 'KO', 'message' => utf8_encode('Un problème est survenu, contactez le service informatique en indiquant le code erreur : ' . $codeErreur));
@@ -49,12 +52,12 @@ class Tools {
 		} 
 		$s = implode(PHP_EOL,$aT);
 		$ProcId = md5($s) ;
-		file_put_contents(__DIR__ ."/../PJ/sqlerror.log", date("Y-m-d H:i:s") . " - [".$codeErreur." - Id " .$ProcId. "]".$message." || " . UserInfo::get('UserId') . "\n", FILE_APPEND | LOCK_EX);
-		file_put_contents(__DIR__ ."/../PJ/sqlerror.log", $s. "\n", FILE_APPEND | LOCK_EX);
+		file_put_contents(__DIR__ ."/../logs/sqlerror.log", date("Y-m-d H:i:s") . " - [".$codeErreur." - Id " .$ProcId. "]".$message." || " . UserInfo::get('UserId') . "\n", FILE_APPEND | LOCK_EX);
+		file_put_contents(__DIR__ ."/../logs/sqlerror.log", $s. "\n", FILE_APPEND | LOCK_EX);
 		
 		if ($showSql) {
-			file_put_contents(__DIR__ ."/../PJ/sqlerror.log", date("Y-m-d H:i:s") . " - " . $bdd->getError(). "\n", FILE_APPEND | LOCK_EX);
-			file_put_contents(__DIR__ ."/../PJ/sqlerror.log", date("Y-m-d H:i:s") . " - ". \BDD\MySQL::$lastSQL. "\n", FILE_APPEND | LOCK_EX);
+			file_put_contents(__DIR__ ."/../logs/sqlerror.log", date("Y-m-d H:i:s") . " - " . $bdd->getError(). "\n", FILE_APPEND | LOCK_EX);
+			file_put_contents(__DIR__ ."/../logs/sqlerror.log", date("Y-m-d H:i:s") . " - ". \BDD\MySQL::$lastSQL. "\n", FILE_APPEND | LOCK_EX);
 		}
 		if ($exit) {
 			$arr = array('status' => 'KO', 'message' => utf8_encode('Un problème est survenu, contactez le service informatique en indiquant le code erreur : ' . $codeErreur));
@@ -64,10 +67,10 @@ class Tools {
 		}
 	}
 	public static function logWarning($errno, $errstr, $trace) {
-		file_put_contents(__DIR__ ."/../PJ/warning.log", date("Y-m-d H:i:s") . " - My WARNING [$errno] $errstr || " . $trace . "\n", FILE_APPEND | LOCK_EX);
+		file_put_contents(__DIR__ ."/../logs/warning.log", date("Y-m-d H:i:s") . " - My WARNING [$errno] $errstr || " . $trace . "\n", FILE_APPEND | LOCK_EX);
 	}
 	public static function logDeprecated($errno, $errstr, $trace) {
-		file_put_contents(__DIR__ ."/../PJ/deprecated.log", date("Y-m-d H:i:s") . " - My WARNING [$errno] $errstr || " . $trace . "\n", FILE_APPEND | LOCK_EX);
+		file_put_contents(__DIR__ ."/../logs/deprecated.log", date("Y-m-d H:i:s") . " - My WARNING [$errno] $errstr || " . $trace . "\n", FILE_APPEND | LOCK_EX);
 	}
 	public static function cleanHTML($html) {
 		$html = self::removeAttributesHTML($html);
@@ -121,12 +124,16 @@ class Tools {
 			$protocole = (cst_MODE == "REC") ? "https://" : $protocole ;
 			$protocole = (cst_MODE == "PROD") ? "https://" : $protocole ;
 				
-			$domaine = $protocole . $domaine . '/PJ/' ;
-			if (self::startsWith($value,$domaine)) {
-				$value = str_replace($domaine,'PJ/', $value) ;
+			$domainePJ = $protocole . $domaine . '/PJ/' ;
+			if (self::startsWith($value,$domainePJ)) {
+				$value = str_replace($domainePJ,'PJ/', $value) ;
+			}
+			$domaineAssets = $protocole . $domaine . '/assets/' ;
+			if (self::startsWith($value,$domaineAssets)) {
+				$value = str_replace($domaineAssets,'assets/', $value) ;
 			}
 			
-			if (!self::startsWith($value,'data:image') && !self::startsWith($value,'blob:') && !self::startsWith($value,'PJ')) {
+			if (!self::startsWith($value,'data:image') && !self::startsWith($value,'blob:') && !self::startsWith($value,'PJ') && !self::startsWith($value,'assets')) {
 				//echo "src toto =$value ". self::startsWith($value,'PJ') ." new startsWith " . strpos($value, 'PJ') . " \n";
 				//$contents = file_get_contents($value);
 				//echo "contents=$contents\n";
@@ -144,11 +151,16 @@ class Tools {
 			} else if (self::startsWith($value,'PJ')) {
 				$value = __DIR__ . "/../" . $value ;
 				if (file_exists($value)) {
-					// $contents = file_get_contents($value);
-					// echo "src2=$value\n";
-					// echo "contents=$contents\n";
 					$uri = GestionImage::data_uri($value) ;
-					//file_put_contents(__DIR__ . "/../PJ/imagesConversion.log",'FROM PATH' . $value . ' => ' . $uri. "\n", FILE_APPEND | LOCK_EX) ;
+					$node->attributes->getNamedItem('src')->nodeValue = $uri ;
+				
+				} else {
+					//echo "file not exists = $value\n";
+				}
+			} else if (self::startsWith($value,'assets')) {
+				$value = __DIR__ . "/../" . $value ;
+				if (file_exists($value)) {
+					$uri = GestionImage::data_uri($value) ;
 					$node->attributes->getNamedItem('src')->nodeValue = $uri ;
 				
 				} else {
@@ -163,6 +175,14 @@ class Tools {
 		}
 		$output = $dom->saveHTML();                  
 		return $output ;
+	}
+	public static function url_get_contents($Url) {
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $Url);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$output = curl_exec($ch);
+		curl_close($ch);
+		return $output;
 	}
 	public static function removeAttributesHTML($html) {
 		$aExclude = array('img','td','br') ; // 'br'
@@ -857,6 +877,9 @@ class Tools {
 		}
 		return $s;
 	}
+	public static function ToNumberSQL($mnt) {
+		$s =  str_replace(".",",",$mnt) ;
+	}
 	public static function startsWith($haystack, $needle)
 	{
 		return $needle === "" || strpos($haystack, $needle) === 0;
@@ -918,6 +941,29 @@ class Tools {
 		$date = explode('-', $date);
 		$date = array_reverse($date);
 		$date = implode($sep, $date);
+		
+		return $date;
+	}
+	public static function ensureDateMySQL($d){
+		if ($d == "") return $d ;
+		if (strpos($d,"-") == 4) return $d ;
+		if (strpos($d,"/") == 2) return self::reverse_date($d) ;
+		if (strpos($d,"/") == 4) return str_replace('/','-',$d) ;
+		if (strpos($d,"-") == 2) return self::datefr($d) ;
+		return "" ;
+	}
+	public static function ensureDateFR($d){
+		if ($d == "") return $d ;
+		if (strpos($d,"-") == 4) return self::reverse_date($d,'-','/') ;
+		if (strpos($d,"/") == 2) return $d ;
+		if (strpos($d,"/") == 4) return self::reverse_date($d,'/','/') ;
+		if (strpos($d,"-") == 2) return str_replace('-','/',$d) ;
+		return "" ;
+	}
+	public static function reverse_date($date, $fromsep = '/', $tosep = '-') {
+		$date = explode($fromsep, $date);
+		$date = array_reverse($date);
+		$date = implode($tosep, $date);
 		
 		return $date;
 	}
