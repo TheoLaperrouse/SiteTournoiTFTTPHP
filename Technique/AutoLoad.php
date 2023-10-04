@@ -10,6 +10,7 @@ class AutoLoad {
 		}
 		self::UtilsAll();
 		self::ModelAll();
+		self::ViewAll();
 		
 		if ($isBDDGlobal) {
 			\BDD\SGBD::setGlobal();
@@ -66,6 +67,7 @@ class AutoLoad {
 	}
 	public static function UtilsTechnique($except = '') {
 		if ($except != 'Tools') require_once self::$root . "Technique/Tools.php";
+		if ($except != 'Template') require_once self::$root . "Technique/Template.php";
 		if ($except != 'Tableaux') require_once self::$root . "Technique/Tableaux.php";
 		if ($except != 'Functions') require_once self::$root . "Technique/Functions.php";
 		require_once self::$root . "Technique/PHPMailer/vendor/autoload.php";
@@ -79,6 +81,10 @@ class AutoLoad {
 		if ($except != 'Utilisateur') require_once self::$root . "Model/Utilisateur.php";
 		if ($except != 'Joueur') require_once self::$root . "Model/Joueur.php";
 		if ($except != 'Tableau') require_once self::$root . "Model/Tableau.php";
+	}
+	public static function ViewAll() {
+		require_once self::$root . "View/View.php";
+		require_once self::$root . "View/WP.php";
 	}
 }
 ?>
