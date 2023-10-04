@@ -121,7 +121,7 @@ class model_Joueur{
 				$sqlPlace = "SELECT count(*) as nbInscrits FROM tableau". $lettre . " Where numLicence='".$numLicence."'";
 				$nbInscrits = (int)\BDD\SGBD::GetInstanceValue($sqlPlace);
 				if ($nbInscrits == 1) {
-					$aOut[] = "D&eacute;sincription du tableau " . $lettre ;
+					$aOut[] = "Désincription du tableau " . $lettre ;
 					$sqlDelete = "DELETE FROM tableau". $lettre . " Where numLicence='".$numLicence."'";
 					\BDD\SGBD::QueryInstance($sqlDelete,true);
 				}
@@ -140,7 +140,7 @@ class model_Joueur{
 				$item = $liste[$numLicence] ;
 				$aTableau = $item["tableaux"] ;
 				foreach ($aTableau as $lettre) {
-					$sqlPlace = "SELECT count(*) as nbInscrits FROM tableau". $lettre . " Where numLicence='".$numLicence."'";
+					$sqlPlace = "SELECT count(*) as nbInscrits FROM tableau". $lettre . " WHERE numLicence='".$numLicence."'";
 					$nbInscrits = (int)\BDD\SGBD::GetInstanceValue($sqlPlace);
 					if ($nbInscrits == 1) {
 						$aOut[] = "Vous êtes inscrit(e) au tableau " . $lettre ;

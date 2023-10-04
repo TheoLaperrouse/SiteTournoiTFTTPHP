@@ -19,13 +19,8 @@
 				UserInfo::setSessionUser($utilisateur);
 				
 		Tools::logToFile("session.log","CONNEXION : " . serialize($_SESSION)) ;
-				//$mail = new Mail();
-				//$mail->SendLogin($utilisateur);
-					
 				include('admin.html');
 			} else {
-				//$mail = new Mail();
-				//$mail->SendEchecLogin($_POST["mail"]);
 				include('echec.html');
 			}
 		} else {

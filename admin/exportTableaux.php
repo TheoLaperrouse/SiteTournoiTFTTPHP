@@ -26,9 +26,9 @@
       </header>
       <div id="main">
         <article>
-<?php		
-		echo Functions::exportTableau() ;
-?>
+        <?php		
+            echo Functions::exportTableau() ;
+        ?>
         </article>
       </div>
       <div id="copyright">
