@@ -7,30 +7,27 @@ class view_WP extends View
 	}
 	public static function getHTMLLastCR() {
 		$sqlCategories = "select * from TProACR order by DateMatch desc limit 1" ;
-		$items = \BDD\SGBD::getItemsInstance($sqlCategories,true);
-		$row = $items[0] ;
-		
+		$items = model_CR::ListeActifs();
 		$s = self::getHTMLCR($items[0]);
-			
 		return $s ;
 	}
 	public static function getAllCR() {
-		$sqlCategories = "select * from TProACR order by DateMatch desc limit 1" ;
-		$items = \BDD\SGBD::getItemsInstance($sqlCategories,true);
+		$items = model_CR::ListeActifs();
 		$s = "" ;
 		foreach($items as $row) {
 			$s .= self::getHTMLCR($row);
 		}
-		
 		return $s ;
 	}
 	public static function getHTMLCR($row) {
+		$domext = ($row["Domicile"] == 1) ? "à domicile" : "à l'extérieur" ;
 		$s = "<div style='margin-bottom: 20px;'>
-			  <h2 class='partner-title'>Compte rendu du match du " . Tools::ensureDateFR($row["DateMatch"]) . " (Jounée n°".$row["NumJournee"].")</h2>
-			  <h3 class='partner-title' style='font-weight:300;font-size:24px'>" . utf8_encode($row["Lieu"]) . "</h3>
+			  <h2 class='partner-title'>Compte rendu du match du " . Tools::ensureDateFR($row["DateMatch"]) . "</h2>
+			  <h3 class='partner-title' style='font-weight:300;font-size:24px'>" . $domext . " contre " . utf8_encode($row["Adversaire"]) .  " (Jounée n°".$row["NumJournee"].")</h3>
 			  <h3 class='partner-title' style='font-style:italic;font-weight:300;font-size:24px;'>Auteur : " . $row["Auteur"] . "</h3>
 				<div class='partner-container'>	
 				".utf8_encode($row["CR"])."
+				</div>
 				</div>
 			" ;
 			

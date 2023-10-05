@@ -32,3 +32,6 @@
 #tableaux > div:nth-child(2n+1) {
   background-color: rgba(220, 220, 220, 0.25);
 }
+
+.MyDialog.fullscreenDialog {max-height:100%;height:100%;width:100%;border-radius:0;}
+.MyDialog.vignetteMessagecontent {overflow:auto;}

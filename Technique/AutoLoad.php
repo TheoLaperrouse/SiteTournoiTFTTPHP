@@ -81,10 +81,12 @@ class AutoLoad {
 		if ($except != 'Utilisateur') require_once self::$root . "Model/Utilisateur.php";
 		if ($except != 'Joueur') require_once self::$root . "Model/Joueur.php";
 		if ($except != 'Tableau') require_once self::$root . "Model/Tableau.php";
+		if ($except != 'CR') require_once self::$root . "Model/CR.php";
 	}
 	public static function ViewAll() {
 		require_once self::$root . "View/View.php";
 		require_once self::$root . "View/WP.php";
+		require_once self::$root . "View/CR.php";
 	}
 }
 ?>
