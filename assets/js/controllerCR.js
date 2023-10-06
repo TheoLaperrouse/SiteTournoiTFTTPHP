@@ -35,7 +35,7 @@ var controllerCR = {
 						btns = $.extend({"Enregistrer": {'function': function() {controllerCR.Save(NumJournee,row);},'menuIcon':'Save'}},btns);
 					}
 					btns = $.extend({"Fermer": {'function': function() {Dialogs.Remove("dialogCR");},'menuIcon':'Close'}},btns);
-					Dialogs.Open("dialogCR",{title:'Edition de la journ&eacute;e n&deg;' + NumJournee,'message':data.html,'btns':btns,fullscreen:true});
+					Dialogs.Open("dialogCR",{title:'Edition de la journée n°' + NumJournee,'message':data.html,'btns':btns,fullscreen:true});
 					that.initializeEdit();
 				} else {
 					Messages.AddMessage('Modification du CR',data.message);
@@ -68,7 +68,7 @@ var controllerCR = {
 		data.push(NumJournee);
 		data.push(row);
 		if ($(".rowChecker.Locked",$("#dialogCR")).hasClass("checked")) {
-			Dialogs.Confirm("dialogConfirmation",{title:'Compte-rendu','message':'Voulez-vous r&eacute;ellement verrouiller ce compte-rendu ?.<br/>Aucune modification ne pourra &ecirc;tre apport&eacute;e ensuite.','callBack' : that.SaveSuite ,'args' : data});	
+			Dialogs.Confirm("dialogConfirmation",{title:'Compte-rendu','message':'Voulez-vous réellement verrouiller ce compte-rendu ?.<br/>Aucune modification ne pourra &ecirc;tre apportée ensuite.','callBack' : that.SaveSuite ,'args' : data});	
 		} else {
 			that.SaveSuite(that,NumJournee,row);
 		}

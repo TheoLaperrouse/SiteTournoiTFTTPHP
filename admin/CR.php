@@ -10,7 +10,6 @@
 	<title>Compte-rendus</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<!--link rel="stylesheet" href="./../assets/css/main.css" /-->
     <link rel="stylesheet" href="./../assets/css/messages.css" />
     <link rel="stylesheet" href="./../assets/css/front.css" />
 	<script src="./../assets/js/jquery.min.js"></script>
@@ -58,8 +57,8 @@
 			<table style='width:90%;margin:auto;'>
 					<tr class="aqua-header">	
 						<td class='titreFacture2'></td>
-						<td class='titreFacture2'>Journ&eacute;e</td>
-						<td class='titreFacture2'>Date pr&eacute;visionnelle</td>
+						<td class='titreFacture2'>Journée</td>
+						<td class='titreFacture2'>Date prévisionnelle</td>
 						<td class='titreFacture2'>Lieu</td>
 						<td class='titreFacture2'>Adversaire</td>
 						<td class='titreFacture2'>Auteur</td>
@@ -84,8 +83,8 @@
 								<td>{$adversaire}</td>
 								<td>{$auteur}</td>
 								<td>{$compteRendu}</td>
-								<td>" . (($cr["Actif"] == 1) ? "<i class='activer menuIcon stretchIcon menuIconCheck'></i> Actif" : " &agrave; activer") ."</td>
-								<td>" . (($cr["Locked"] == 1) ? "<i class='verrouiller menuIcon stretchIcon menuIconLock'></i> Verrouill&eacute;" : "&agrave; verrouiller") ."</td>
+								<td>" . (($cr["Actif"] == 1) ? "<i class='activer menuIcon stretchIcon menuIconCheck'></i> Actif" : " à activer") ."</td>
+								<td>" . (($cr["Locked"] == 1) ? "<i class='verrouiller menuIcon stretchIcon menuIconLock'></i> Verrouillé" : "à verrouiller") ."</td>
 							</tr>";
 					}
                 ?>

@@ -47,7 +47,7 @@ var controllerDesinscription = {
 			 data: form_data,
 			 success: function(data){
 				if (data.status == "OK") {
-					Messages.AddMessage('Modification du joueur','D&eacute;sinscription effectuée');
+					Messages.AddMessage('Modification du joueur','Désinscription effectuée');
 				} else {
 					Messages.AddMessage('Modification du joueur',data.message);
 				}

@@ -34,7 +34,7 @@
 	<div id="desinscriptionView" class="listeSC ListeController barre1">
 		<div style="clear:both;min-height:40px;"></div>
 		<div class="rowField">
-		  <div class="rowFieldLibelle">Rechercher (par nom ou n&deg; de licence) :</div>
+		  <div class="rowFieldLibelle">Rechercher (par nom ou n° de licence) :</div>
 		  <input type='text' id='searchJoueur' value='' placeholder='Rechercher un joueur ...' />
 		</div>
 		<div style="margin-bottom:10px;">
