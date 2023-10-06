@@ -5,70 +5,48 @@
     <link rel="icon" type="image/png" href="./../favicon.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./../assets/css/main.css" />
+    <link rel="stylesheet" href="./../assets/css/messages.css" />
+    <link rel="stylesheet" href="./../assets/css/front.css" />
+    <script src="./../assets/js/jquery.min.js"></script>
+    <script src="./../assets/js/controllerAdmin.js"></script>
+    <script src="./../assets/js/Messages.js"></script>
+    <script src="./../assets/js/MyDialog.js"></script>
   </head>
 
   <body class="is-preload">
-    <div id="wrapper" class="fade-in">
-      <div id="intro">
-		<div style="position:absolute;z-index:2;right:10px;top:10px;color: white;display: block;"><a href="../index.php" class="logo">Accueil</a></div>
-        <h1>Administration</h1>
-        <p>Page des fonctions d'administration du tournoi</p>
-        <ul class="actions">
-          <li>
-            <a href="#header" class="button icon solo fa-arrow-down scrolly" >Fonctions d'admin</a>
-          </li>
-        </ul>
-      </div>
-      <header id="header">
-        <a href="#" class="logo">Administration</a>
-      </header>
-      <div id="main">
-        <article>
-          <h3 class="center">
-            <a href="./../tableaux.php" class="link"> Voir les inscrits </a>
-          </h3>
-          <h3 class="center">
-            <a href="./exportTableaux.php" class="link"> Export CSV des tableaux</a>
-          </h3>
-          <h3 class="center">
-            <a href="./exportExcel.php" class="link"> Export Excel des tableaux</a>
-          </h3>
-          <h3 class="center">
-            <a href="./stats.php" class="link"> Les stats </a>
-          </h3>
-          <h3 class="center">
-            <a href="./desinscription.php" class="link"> Désinscription </a>
-          </h3>
-          <h3 class="center">
-            <a href="./logout.php" class="link"> Déconnexion </a>
-          </h3>
-        </article>
-      </div>
-      <div id="copyright">
-        <ul>
-          <li>
-            <h3>
-              Si vous avez un problème avec votre inscription, veuillez me
-              contacter par mail (contact@migratio.fr) ou par Messenger(<a
-                href="https://www.facebook.com/messages/t/stephane.lerouzic.5"
-              >
-                Stéphane Le Rouzic</a
-              >)
-            </h3>
-          </li>
-        </ul>
-        <ul>
-          <li>&copy; Thorigné Fouillard Tennis de Table</li>
-          <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-        </ul>
-      </div>
-    </div>
-    <script src="./../assets/js/jquery.min.js"></script>
-    <script src="./../assets/js/jquery.scrollex.min.js"></script>
-    <script src="./../assets/js/jquery.scrolly.min.js"></script>
-    <script src="./../assets/js/skel.min.js"></script>
-    <script src="./../assets/js/util.js"></script>
-    <script src="./../assets/js/main.js"></script>
+	<div id="enteteAdmin" class="enteteController barre1">
+		Administration
+		<div class="separateur" style="margin-bottom:1px;"></div>
+		
+		<div class="enteteBarre">
+			<div id="accueil" class="btnValide" title="Accueil du tournoi"><i class="menuIcon menuIconHome"></i></div>
+		</div>
+	</div>
+	
+	<div id="adminView" class="listeSC ListeController barre1">
+		<div style="clear:both;min-height:40px;"></div>
+		<div id="accueil" class="tabBreadCrumbInner level actif" data-level="0" style="">
+			<h1 style="max-width:800px;margin:auto;">Que voulez-vous faire ?</h1>
+			<div style="clear:both;"></div>
+			<div class="listeSC ListeController barre2">
+				<div class="Container" >
+					<div style="max-width:800px;margin:auto;">
+						<div class="btnValide btnAccueil nav" data-nav="./CR.php"><i class="menuIcon menuIconTemplate"></i> Compte-rendus de PRO A</div>
+						<div class="btnValide btnAccueil nav" data-nav="./../tableaux.php"><i class="menuIcon menuIconEye"></i> Voir les inscrits</div>
+						<div class="btnValide btnAccueil nav" data-nav="./exportTableaux.php"><i class="menuIcon menuIconExcel"></i> Export CSV des tableaux</div>
+						<div class="btnValide btnAccueil nav" data-nav="./exportExcel.php"><i class="menuIcon menuIconExcel"></i> Export Excel des tableaux</div>
+						<div class="btnValide btnAccueil nav" data-nav="./stats.php"><i class="menuIcon menuIconSigma"></i> Les stats</div>
+						<div class="btnValide btnAccueil nav" data-nav="./desinscription.php"><i class="menuIcon menuIconClose"></i> Désinscription</div>
+						<div class="btnValide btnAccueil nav" data-nav="./logout.php"><i class="menuIcon menuIconSignOut"></i> Déconnexion</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script language="javascript">
+		$(document).ready(function() {
+			controllerAdmin.initialize();
+		});
+	</script>
   </body>
 </html>

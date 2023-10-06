@@ -1,0 +1,32 @@
+2023-10-05 10:10:28 - [2065211002 - Id aaa1163feb6432208eb5e1765bd979ce] || 2
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\MySQL.php(119) : Tools::logSqlError
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\SGBD.php(95) : BDD\\MySQL->query
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\SGBD.php(143) : BDD\\SGBD::QueryInstanceGeneric
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\Model\\Joueur.php(47) : BDD\\SGBD::QueryInstance
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\ajax\\doJoueur.php(41) : model_Joueur::DeleteTableau
+2023-10-05 10:10:28 - Table 'tftt.tableau' doesn't exist
+2023-10-05 10:10:28 - DELETE FROM tableau WHERE numLicence = '228679'
+2023-10-05 10:11:11 - [1781984367 - Id aaa1163feb6432208eb5e1765bd979ce] || 2
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\MySQL.php(119) : Tools::logSqlError
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\SGBD.php(95) : BDD\\MySQL->query
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\SGBD.php(143) : BDD\\SGBD::QueryInstanceGeneric
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\Model\\Joueur.php(47) : BDD\\SGBD::QueryInstance
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\ajax\\doJoueur.php(41) : model_Joueur::DeleteTableau
+2023-10-05 10:11:11 - Table 'tftt.tableau' doesn't exist
+2023-10-05 10:11:11 - DELETE FROM tableau WHERE numLicence = '228679'
+2023-10-05 22:15:37 - [870855532 - Id 5ce5b7b57844da4cd53d0c3529ab0f93] || 2
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\MySQL.php(119) : Tools::logSqlError
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\SGBD.php(95) : BDD\\MySQL->query
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\SGBD.php(143) : BDD\\SGBD::QueryInstanceGeneric
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\Model\\CR.php(17) : BDD\\SGBD::QueryInstance
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\ajax\\doCR.php(27) : model_CR::GetCRByNumJournee
+2023-10-05 22:15:37 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+2023-10-05 22:15:37 - select * from TProACR Where NumJournee = 
+2023-10-05 22:15:40 - [1086233357 - Id 5ce5b7b57844da4cd53d0c3529ab0f93] || 2
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\MySQL.php(119) : Tools::logSqlError
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\SGBD.php(95) : BDD\\MySQL->query
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\BDD\\SGBD.php(143) : BDD\\SGBD::QueryInstanceGeneric
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\Model\\CR.php(17) : BDD\\SGBD::QueryInstance
+D:\\Sources\\TFTT\\git\\SiteTournoiTFTTPHP\\ajax\\doCR.php(27) : model_CR::GetCRByNumJournee
+2023-10-05 22:15:40 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+2023-10-05 22:15:40 - select * from TProACR Where NumJournee = 

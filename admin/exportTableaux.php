@@ -15,35 +15,36 @@
     <link rel="icon" type="image/png" href="./../favicon.png" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./../assets/css/main.css" />
+    <link rel="stylesheet" href="./../assets/css/messages.css" />
+    <link rel="stylesheet" href="./../assets/css/front.css" />
+    <script src="./../assets/js/jquery.min.js"></script>
   </head>
 
   <body class="is-preload">
-    <div id="wrapper" class="fade-in">
-      <header id="header">
-          <h2 class="center">Export des données</h2>
-		  <a href="./connexion.php" class="logo">Retournez aux panneau d'admin</a>
-      </header>
-      <div id="main">
-        <article>
+	<div id="enteteCSV" class="enteteController barre1">
+		Export des données csv
+		<div class="separateur" style="margin-bottom:1px;"></div>
+		
+		<div class="enteteBarre">
+			<div id="accueil" class="btnValide" title="Retour au panneau d'administration"><i class="menuIcon menuIconHome"></i></div>
+		</div>
+	</div>
+	
+	<div id="csvView" class="listeSC ListeController barre1">
+		<div style="clear:both;min-height:40px;"></div>
         <?php		
             echo Functions::exportTableau() ;
         ?>
-        </article>
-      </div>
-      <div id="copyright">
-        <ul>
-          <li>&copy; Thorigné Fouillard Tennis de Table</li>
-          <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-        </ul>
-      </div>
-    </div>
-    <script src="./../assets/js/jquery.min.js"></script>
-    <script src="./../assets/js/jquery.scrollex.min.js"></script>
-    <script src="./../assets/js/jquery.scrolly.min.js"></script>
-    <script src="./../assets/js/skel.min.js"></script>
-    <script src="./../assets/js/util.js"></script>
-    <script src="./../assets/js/main.js"></script>
+	</div>
+	<script language="javascript">
+		$(document).ready(function() {
+			var Entete = $("#enteteCSV") ;
+		
+			$("#accueil",Entete).off('click').on('click',function(){
+				document.location.href = "./admin.html";
+			});
+		});
+	</script>
   </body>
 </html>
 <?php

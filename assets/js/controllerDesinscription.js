@@ -1,10 +1,24 @@
 var controllerDesinscription = {
 	currentItem: null,
+	Entete: null,
+	View:null,
 	initialize: function() {
 		var that = this ;
-		
 		$("<link/>", {rel: "stylesheet", type: "text/css", href: "./../assets/js/jquery-ui.min.css"}).appendTo("head");
-		$("#searchJoueur").autocomplete({
+		that.View = $("#desinscriptionView") ;
+		that.Entete = $("#enteteDesinscription") ;
+		
+		$("#accueil",that.Entete).off('click').on('click',function(){
+			document.location.href = "./admin.html";
+		});
+		
+		$("#desinscription",that.View).off('click').on('click',function(){
+			var numLicence = $("#numLicence",that.View).val() ;
+			if (numLicence != "") {
+				that.desinscrire(numLicence);
+			}
+		});
+		$("#searchJoueur",that.View).autocomplete({
 			source: "./../ajax/getSearchPlayer.php",
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
 				alert(textStatus);
@@ -21,6 +35,25 @@ var controllerDesinscription = {
 			minLength: 2
 		});
 	},
+	desinscrire: function(numLicence){
+		var that = this ;
+		var form_data = {
+			numLicence: numLicence,
+			mode:'DESINSCRIPTION'
+		};
+		$.ajax({
+			 type: "POST",
+			 url: "./../ajax/doJoueur.php",
+			 data: form_data,
+			 success: function(data){
+				if (data.status == "OK") {
+					Messages.AddMessage('Modification du joueur','Désinscription effectuée');
+				} else {
+					Messages.AddMessage('Modification du joueur',data.message);
+				}
+			 }
+		});
+	},
 	setItem: function() {
 		var that = this ;
 		var item = that.currentItem ;
@@ -31,29 +64,29 @@ var controllerDesinscription = {
 			sModif += '<td><input type="text" id="nom" style="width:200px;" value="'+item.nom+'" /></td>';
 			sModif += '<td><input type="text" id="prenom" style="width:200px;" value="'+item.prenom+'" /></td>';
 			sModif += '<td><input type="text" id="nombrePoints" style="width:100px;" value="'+item.nombrePoints+'" /></td>';
-			sModif += '<td><div style="float:right;font-weight:700;cursor:pointer;color:red;" id="modifJoueur"><i class="ui-icon ui-icon-check"></i> Modifier</div></td></tr>';
+			sModif += '<td><div class="btnValide" id="modifJoueur"><i class="menuIcon menuIconCheck"></i> Modifier</div></td></tr>';
 			sModif += '</table>';
 			var sTableaux = '' ;
 			for (var i=0;i<item.aTableaux.length;i++) {
 				var t = item.aTableaux[i] ;
-				sTableaux+='<div style="clear:both;width:300px;"> Tableau ' + t + ' <div style="float:right;font-weight:700;cursor:pointer;color:red;" class="deleteTableau" data-tableau="'+t+'"><i class="ui-icon ui-icon-circle-close"></i> Supprimer</div></div>';
+				sTableaux+='<div class="rowField" style="margin-bottom:10px;font-size:1.25em;"> Tableau ' + t + ' <i data-tableau="'+t+'" class="deleteTableau menuIcon stretchIcon menuIconClose" title="Supprimer"></i></div>';
 			}
 			
-			var sNotTableaux = '<div class="field"><label for="TableauToAdd">Ajouter le joueur à un tableau:</label><select id="TableauToAdd" style="width:300px;"><option value="'+t+'" selected="true">Choisir un tableau ...</option>' ;
+			var sNotTableaux = '<div class="rowField"><div class="rowFieldLibelle">Ajouter le joueur à un tableau:</div><select id="TableauToAdd" style="width:300px;"><option value="'+t+'" selected="true">Choisir un tableau ...</option>' ;
 			for (var i=0;i<item.aNotTableaux.length;i++) {
 				var t = item.aNotTableaux[i] ;
 				sNotTableaux+='<option value="'+t+'"> Tableau ' + t + ' </option>';
 			}
 			sNotTableaux+='</select>';
-			sNotTableaux+='<div style="float:right;font-weight:700;cursor:pointer;color:red;" id="addJoueur"><i class="ui-icon ui-icon-circle-plus"></i> Ajouter au tableau</div>' ;
+			sNotTableaux+='<div style="float:right;" class="btnValide" id="addJoueur"><i class="menuIcon menuIconAdd"></i> Ajouter au tableau</div>' ;
 			
-			$("#modif").html(sModif);
-			$("#tableaux").html(sTableaux);
-			$("#add").html(sNotTableaux);
-			$("#licenceSearch").val(item.numLicence);
+			$("#modif",that.View).html(sModif);
+			$("#tableaux",that.View).html(sTableaux);
+			$("#add",that.View).html(sNotTableaux);
+			$("#licenceSearch",that.View).val(item.numLicence);
 			$(this).val(item.nom) ;
 			
-			$("#modifJoueur",$("#modif")).off('click').on('click',function(){
+			$("#modifJoueur",$("#modif",that.View)).off('click').on('click',function(){
 				var row = $(this).closest("tr");
 				var club = $("#club",row).val() ;
 				var nom = $("#nom",row).val() ;
@@ -61,11 +94,11 @@ var controllerDesinscription = {
 				var nombrePoints = $("#nombrePoints",row).val() ;
 				that.modifJoueur(item.numLicence,club,nom,prenom,nombrePoints,row) ;
 			});
-			$(".deleteTableau",$("#tableaux")).off('click').on('click',function(){
+			$(".deleteTableau",$("#tableaux",that.View)).off('click').on('click',function(){
 				var t = $(this).data("tableau") ;
 				that.deleteTableauJoueur(item.numLicence,t,$(this).parent()) ;
 			});
-			$("#addJoueur",$("#add")).off('click').on('click',function(){
+			$("#addJoueur",$("#add",that.View)).off('click').on('click',function(){
 				var t = $("#TableauToAdd > option:selected").val() ;
 				that.addTableauJoueur(item.numLicence,t,$(this).parent()) ;
 			});

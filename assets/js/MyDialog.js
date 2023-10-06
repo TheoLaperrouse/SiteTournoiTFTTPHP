@@ -196,7 +196,7 @@ classeDialogs.prototype.Remove = function(id) {
 			
 			if (this.Dialogs.length == 0) {
 				//console.log("Dialogs.Remove, Lancement de App.controller.decreaseZIndex");
-				App.controller.decreaseZIndex() ;
+				//App.controller.decreaseZIndex() ;
 			}
 		}
 	}
@@ -265,7 +265,7 @@ classeDialog.prototype.Open = function() {
 		e.preventDefault();
 		var tab = $(this).data("tab-menu") ;
 		var c = $(this).data("controller") ;
-		App.controller.renderGenericView(tab,c);
+		//App.controller.renderGenericView(tab,c);
 	}) ;
 			
 	if (that.parentDialog != null) {
