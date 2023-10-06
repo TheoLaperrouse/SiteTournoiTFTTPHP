@@ -32,9 +32,9 @@ class AutoLoad {
 	public static function exitGeneric() {
 		self::exitTFTT();
 	}
-	public static function exitTFTT() {
+	public static function exitTFTT($exit = true) {
 		\BDD\SGBD::unsetGlobal();
-		exit();
+		if ($exit) exit();
 	}
 	public static function CheckSession() {
 		$auth = \UserInfo::is_set('UserId');
