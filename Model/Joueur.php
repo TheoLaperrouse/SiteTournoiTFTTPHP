@@ -48,10 +48,10 @@ class model_Joueur{
 	}
 	public static function UpdateJoueur($numLicence, $club, $nom, $prenom, $nombrePoints, $aTableau) {
 		$aModif = array() ;
-		$aModif[] = "club='".\BDD\SGBD::real_escape_string(utf8_decode($club))."'" ;
-		$aModif[] = "nom='".\BDD\SGBD::real_escape_string(utf8_decode($nom))."'" ;
-		$aModif[] = "prenom='".\BDD\SGBD::real_escape_string(utf8_decode($prenom))."'" ;
-		$aModif[] = "nombrePoints='".\BDD\SGBD::real_escape_string(utf8_decode($nombrePoints))."'" ;
+		$aModif[] = "club='".\BDD\SGBD::real_escape_string($club)."'" ;
+		$aModif[] = "nom='".\BDD\SGBD::real_escape_string($nom)."'" ;
+		$aModif[] = "prenom='".\BDD\SGBD::real_escape_string($prenom)."'" ;
+		$aModif[] = "nombrePoints='".\BDD\SGBD::real_escape_string($nombrePoints)."'" ;
 		foreach ($aTableau as $lettre) {
 			$sql = "UPDATE tableau".$lettre." SET ".implode(',',$aModif)." WHERE numLicence = '".$numLicence."'";
 			Tools::l('update.log',$sql);
@@ -60,11 +60,11 @@ class model_Joueur{
 	}
 	public static function AddJoueur($prenom, $nom, $nombrePoints, $numLicence, $club, $lettresTableau) {
 		$aValues = array() ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($prenom))."'" ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($nom))."'" ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($nombrePoints))."'" ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($numLicence))."'" ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($club))."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($prenom)."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($nom)."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($nombrePoints)."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($numLicence)."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($club)."'" ;
 		foreach ($lettresTableau as $lettre) {
 			if ($lettre != "") {
 				if (1000 < $numLicence && $numLicence < 9999999) {
@@ -90,11 +90,11 @@ class model_Joueur{
 	}
 	public static function AddJoueurToTableau($prenom, $nom, $nombrePoints, $numLicence, $club, $lettre) {
 		$aValues = array() ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($prenom))."'" ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($nom))."'" ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($nombrePoints))."'" ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($numLicence))."'" ;
-		$aValues[] = "'".\BDD\SGBD::real_escape_string(utf8_decode($club))."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($prenom)."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($nom)."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($nombrePoints)."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($numLicence)."'" ;
+		$aValues[] = "'".\BDD\SGBD::real_escape_string($club)."'" ;
 		$sqlPlace = "SELECT count(*) as nbInscrits FROM tableau".$lettre;
 		$nbInscrits = (int)\BDD\SGBD::GetInstanceValue($sqlPlace);
 		$aParams = model_Tableau::getParamsTableau($lettre);

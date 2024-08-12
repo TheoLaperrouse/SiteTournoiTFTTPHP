@@ -72,7 +72,6 @@ class model_Tableau{
 			where NB.Nom='{$nomNB}'
 			" ;
 		$row = \BDD\SGBD::QueryInstance($sql,true,true);
-		array_walk_recursive($row,'encode_items');
 		return $row ;	
 	}
 	public static function formatPrice($price) {

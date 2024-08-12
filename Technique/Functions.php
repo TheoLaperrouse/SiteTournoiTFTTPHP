@@ -7,14 +7,14 @@ class Functions {
 		echo "<tr><th>Nom</th><th>Prénom</th><th>Nombre de Points</th><th>Club</th>";
 		foreach($items as $data) {
 			echo "<tr><td>" .
-				$data["nom"] .
-				"</td><td>" .
-				$data["prenom"] .
-				"</td><td>" .
-				$data["nombrePoints"] .
-				"</td><td>" .
-				$data["club"] .
-				"</td></tr>";
+			$data["nom"] .
+			"</td><td>" .
+			$data["prenom"] .
+			"</td><td>" .
+			$data["nombrePoints"] .
+			"</td><td>" .
+			$data["club"] .
+			"</td></tr>";
 		}
 		echo "</table>";
 	}
