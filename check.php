@@ -36,9 +36,14 @@
 		<div id="main">
 			<article>
 				<?php
-                    foreach($aTableaux as $t) {
+				  if (empty($aTableaux)) {
+					echo "<h2>Vous n'êtes inscrit(e) à aucun tableau</h2>";
+				} else {
+					// Sinon, affiche les tableaux
+					foreach ($aTableaux as $t) {
 						echo "<h2>".$t."</h2>";
 					}
+				}
                 ?>
 		</div>
 		<div id="copyright">
@@ -46,7 +51,7 @@
           <li>
             <h3>
               Si vous avez un problème avec votre inscription, veuillez me
-              contacter par mail (contact@migratio.fr) ou par Messenger(<a
+              contacter par mail (theolaperrouse@gmail.com) ou par Messenger(<a
                 href="https://www.facebook.com/messages/t/100000464042474"
               >
                 Théo Laperrouse</a

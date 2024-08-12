@@ -37,7 +37,7 @@
           <li>
             <h3>
               Si vous avez un problème avec votre inscription, veuillez me
-              contacter par mail (contact@migratio.fr) ou par Messenger(<a
+              contacter par mail (theolaperrouse@gmail.com) ou par Messenger(<a
                 href="https://www.facebook.com/messages/t/100000464042474"
               >
                 Théo Laperrouse</a
