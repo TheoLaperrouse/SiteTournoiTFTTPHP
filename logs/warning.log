@@ -1,5 +1,0 @@
-2023-10-04 23:55:01 - My WARNING [2] Attempt to modify property 'row' of non-object || #0 D:\Sources\TFTT\git\SiteTournoiTFTTPHP\ajax\doCR.php(31): myErrorHandler(2, 'Attempt to modi...', 'D:\\Sources\\TFTT...', 31, Array)<br />
-#1 {main}
-2023-10-04 23:55:01 - My WARNING [2] array_walk_recursive() expects parameter 1 to be array, null given || #0 [internal function]: myErrorHandler(2, 'array_walk_recu...', 'D:\\Sources\\TFTT...', 31, Array)<br />
-#1 D:\Sources\TFTT\git\SiteTournoiTFTTPHP\ajax\doCR.php(31): array_walk_recursive(NULL, 'encode_items')<br />
-#2 {main}

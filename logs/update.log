@@ -1,3 +1,0 @@
-2023-10-05 10:14:44 - UPDATE tableauC SET club='TFTT',nom='GERVAIS',prenom='Rodolphe',nombrePoints='1529' WHERE numLicence = '228679' || 2
-2023-10-05 10:14:44 - UPDATE tableauL SET club='TFTT',nom='GERVAIS',prenom='Rodolphe',nombrePoints='1529' WHERE numLicence = '228679' || 2
-2023-10-05 10:14:44 - UPDATE tableauM SET club='TFTT',nom='GERVAIS',prenom='Rodolphe',nombrePoints='1529' WHERE numLicence = '228679' || 2

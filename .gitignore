@@ -6,3 +6,4 @@ Config-prod.php
 .htaccess
 /Technique/Excel
 /Technique/PHPMailer
+/logs
